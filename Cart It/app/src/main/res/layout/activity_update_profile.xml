@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.UpdateProfileActivity">
+
+    <RelativeLayout
+        android:id="@+id/dashboardContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:padding="60dp">
+
+            <ImageView
+                android:id="@+id/iv_user_img"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_user_profile" />
+
+            <TextView
+                android:id="@+id/tv_mobile_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/nunito_bold"
+                android:text="9876543210"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <!--<TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/font_medium"
+                android:text="@string/user_email"
+                android:textColor="@color/fullBlack"
+                android:textSize="@dimen/normal_text_size" />-->
+
+            <!--android:background="@drawable/background_border"-->
+            <EditText
+                android:id="@+id/et_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_medium"
+                android:gravity="center"
+                android:hint="Name"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/et_mail_id"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/nunito_medium"
+                android:gravity="center"
+                android:hint="Email"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="16dp" />
+
+            <!--<EditText
+                android:id="@+id/et_"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/background_border"
+                android:fontFamily="@font/font_medium"
+                android:gravity="center"
+                android:hint=""
+                android:inputType="number"
+                android:textColor="@color/fullBlack"
+                android:textColorHint="@color/fullBlack"
+                android:textSize="@dimen/medium_text_size" />-->
+
+            <Button
+                android:id="@+id/bt_update_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:fontFamily="@font/nunito_medium"
+                android:gravity="center"
+                android:text="Update Profile"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
