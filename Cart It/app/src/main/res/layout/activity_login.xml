@@ -181,6 +181,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_resend_otp"
+                android:backgroundTint="@color/app_blue_007EED"
                 android:layout_marginTop="30dp"
                 android:text="Send OTP" />
             <Button
@@ -189,6 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_resend_otp"
                 android:layout_marginTop="30dp"
+                android:backgroundTint="@color/app_blue_007EED"
                 android:visibility="gone"
                 android:text="Verify OTP" />
 

@@ -11,4 +11,6 @@
 <!--    app color combos-->
     <color name="app_blue_007EED">#007EED</color>
     <color name="app_blue_004">#004c8e</color>
+
+    <color name="gray_underline">#BDB8B8</color>
 </resources>
