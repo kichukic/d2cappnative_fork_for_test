@@ -77,6 +77,7 @@
                 android:layout_weight="30"
                 android:layout_height="wrap_content"
                 android:hint="9876543210"
+                android:nextFocusDown="@+id/et_otp1"
                 android:fontFamily="@font/nunito_light"
                 android:layout_below="@+id/tv_verify_mobile"
                 android:inputType="phone"
@@ -145,6 +146,7 @@
                     android:gravity="center"
                     android:inputType="number"
                     android:maxLength="1"
+                    android:imeOptions="actionDone"
                     android:textSize="20sp" />
             </LinearLayout>
             <RelativeLayout
@@ -163,15 +165,15 @@
                     android:drawableLeft="@drawable/ic_message_resend_otp"
                     android:fontFamily="@font/nunito_light"
                     android:text=" Resend OTP" />
+
                 <TextView
                     android:id="@+id/tv_otp_timer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_light"
-                    android:text="00:00 sec"
-                    android:paddingEnd="20dp"
                     android:layout_alignParentEnd="true"
-                    />
+                    android:fontFamily="@font/nunito_light"
+                    android:paddingEnd="20dp"
+                    android:text="00:00 sec" />
             </RelativeLayout>
 
             <Button

@@ -54,7 +54,7 @@
             <EditText
                 android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nunito_medium"
@@ -67,7 +67,7 @@
             <EditText
                 android:id="@+id/et_mail_id"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/nunito_medium"

@@ -45,11 +45,11 @@ class UserSessionManager(context: Context) {
         return sharedPreferences.getString(mUserEmail, "")!!
     }
     fun setUserEmail(uname: String) {
-        sharedPreferences.edit().putString(mUserName, uname).apply()
+        sharedPreferences.edit().putString(mUserEmail, uname).apply()
     }
 
     fun setUserName(uemail: String) {
-        sharedPreferences.edit().putString(mUserEmail, uemail).apply()
+        sharedPreferences.edit().putString(mUserName, uemail).apply()
     }
     fun getUserName(): String {
         return sharedPreferences.getString(mUserName, "")!!
