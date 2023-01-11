@@ -3,9 +3,7 @@ package com.infolitz.cartit1.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.close
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
@@ -13,20 +11,12 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
-import com.infolitz.cartit1.BuildConfig
 import com.infolitz.cartit1.R
 import com.infolitz.cartit1.databinding.ActivityMainBinding
 import com.infolitz.cartit1.fragment.HomeFragment
-import com.infolitz.cartit1.fragment.SettingsFragment
+import com.infolitz.cartit1.fragment.CartFragment
 import com.infolitz.cartit1.helper.UserSessionManager
 
 class MainActivity : AppCompatActivity() {
@@ -80,8 +70,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_home->{Toast.makeText(applicationContext,"Clicked home",Toast.LENGTH_SHORT).show()
                                 replaceFragment(HomeFragment(),it.title.toString())
                                 }
-                R.id.nav_settings->{Toast.makeText(applicationContext,"Clicked settings",Toast.LENGTH_SHORT).show()
-                    replaceFragment(SettingsFragment(),it.title.toString())
+                R.id.nav_cart->{Toast.makeText(applicationContext,"Clicked cart",Toast.LENGTH_SHORT).show()
+                    replaceFragment(CartFragment(),it.title.toString())
                 }
                 R.id.nav_logout->{Toast.makeText(applicationContext,"Clicked Logout",Toast.LENGTH_SHORT).show()
                     onLogOutClicked()
