@@ -18,8 +18,11 @@
             android:id="@+id/imageView_grid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scaleType="center"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="@drawable/img_curry_powder_cumin"
+          />
+        <!--  tools:srcCompat="@tools:sample/avatars" -->
 
         <TextView
             android:id="@+id/tv_item_name_grid"

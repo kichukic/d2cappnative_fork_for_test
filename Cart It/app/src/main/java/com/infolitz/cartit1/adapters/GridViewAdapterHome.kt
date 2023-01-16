@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.infolitz.cartit1.R
 import com.infolitz.cartit1.helper.ProductViewModal
+import com.infolitz.cartit1.helper.getGlideProgress
 
 internal class GridViewAdapterHome(
     private val itemList: List<ProductViewModal>,
@@ -16,8 +19,11 @@ internal class GridViewAdapterHome(
 ) :
     BaseAdapter() {
     private var layoutInflater: LayoutInflater? = null
-    private lateinit var itemTextView: TextView
+    private lateinit var productName: TextView
+    private lateinit var productPrice: TextView
     private lateinit var itemImageView: ImageView
+
+    var data = ArrayList<ProductViewModal>()
 
     // below method is use to return the count of course list
     override fun getCount(): Int {
@@ -46,11 +52,22 @@ internal class GridViewAdapterHome(
         }
 
         itemImageView = convertView!!.findViewById(R.id.imageView_grid)
-        itemTextView = convertView!!.findViewById(R.id.tv_item_name_grid)
+        productName = convertView!!.findViewById(R.id.tv_item_name_grid)
+        productPrice = convertView!!.findViewById(R.id.tv_item_price_new_grid)
 
-        itemImageView.setImageResource(itemList.get(position).itemImg)
-        itemTextView.setText(itemList.get(position).itemName)
+        /*itemImageView.setImageResource(itemList.get(position).proImgUrl)*/
+
+        Glide.with(context).load(itemList.get(position).proImgUrl)
+            .placeholder(context.getGlideProgress())
+            .error(R.drawable.ic_user_profile).transition(
+                DrawableTransitionOptions.withCrossFade()
+            ).into(itemImageView)
+
+
+        productName.setText(itemList.get(position).productName)
+        productPrice.setText(itemList.get(position).price.toString())
 
         return convertView
     }
+
 }

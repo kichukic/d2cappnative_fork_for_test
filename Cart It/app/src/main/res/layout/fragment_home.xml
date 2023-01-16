@@ -34,6 +34,7 @@
             android:padding="6dp"
             android:layout_marginBottom="15sp"
             android:verticalSpacing="10dp"
+            tools:listitem="@layout/grid_layout_home"
             />
 
     </LinearLayout>

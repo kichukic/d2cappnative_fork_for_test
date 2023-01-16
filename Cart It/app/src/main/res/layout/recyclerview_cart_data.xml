@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_cart_re"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="3dp"
@@ -121,7 +122,6 @@
                                 android:gravity="center_horizontal|center_vertical"
                                 android:textColor="@color/black"
                                 android:textSize="14sp"
-                                android:text="2"
                                 android:textStyle="bold"
                                 tools:text="123" />
 

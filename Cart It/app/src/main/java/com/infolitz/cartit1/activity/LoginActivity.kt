@@ -368,7 +368,7 @@ class LoginActivity : AppCompatActivity() {
                     val user = task.result?.user
 //                    val user = Firebase.auth.currentUser
                     auth = Firebase.auth
-                    userSessionManager.setUserUId( auth.uid.toString()) // write to shared pref
+                    userSessionManager.setAgentUId( auth.uid.toString()) // write to shared pref
                     userSessionManager.setMobileNumber("+91" +activityLoginBinding.etMobileNumber.text) // write to shared
                     writeDataToFirebase() //write to firebase
 
@@ -398,10 +398,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun writeDataToFirebase() {
-        uId=userSessionManager.getUserUId()
-        var userReference = databaseReference.child("Users").child(uId)
-        userReference.child("uid").setValue(userSessionManager.getUserUId())
-        userReference.child("umobile").setValue(userSessionManager.getMobileNumber())
+        uId=userSessionManager.getAgentUId()
+        var userReference = databaseReference.child("Agents").child(uId)
+        userReference.child("id").setValue(userSessionManager.getAgentUId())
+        userReference.child("mobile").setValue(userSessionManager.getMobileNumber())
     }
 
     //for firebase

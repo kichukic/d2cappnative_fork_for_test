@@ -13,6 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.infolitz.cartit1.R
 import com.infolitz.cartit1.databinding.ActivityMainBinding
 import com.infolitz.cartit1.fragment.HomeFragment
@@ -28,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var activityMainBinding: ActivityMainBinding
     lateinit var toggle: ActionBarDrawerToggle
 
+    //for firebase
+    private lateinit var databaseReference: DatabaseReference
+
 
     lateinit var drawerLayout:DrawerLayout
 
@@ -40,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         initDrawer()
 
         initFirebase()
+        initializeDbRef()
+
         initUserValues()
     }
 
@@ -53,8 +61,8 @@ class MainActivity : AppCompatActivity() {
         val navView: NavigationView =findViewById(R.id.nav_view)
 
         val headerView: View = navView.getHeaderView(0)// for setting the user name
-        headerView.findViewById<TextView>(R.id.tv_user_name).text = userSessionManager.getUserName()// for setting the user name
-        headerView.findViewById<TextView>(R.id.tv_user_mail).text = userSessionManager.getUserEmail()// for setting the user name
+        headerView.findViewById<TextView>(R.id.tv_user_name).text = userSessionManager.getAgentName()// for setting the user name
+        headerView.findViewById<TextView>(R.id.tv_user_mail).text = userSessionManager.getAgentEmail()// for setting the user name
 
         replaceFragment(HomeFragment(),"Home") //on load set the home default
 
@@ -102,7 +110,43 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initUserValues() {
-        Log.e("my_fire","uid:-"+userSessionManager.getUserUId())
+        Log.e("my_fire","uid:-"+userSessionManager.getAgentUId())
+
+
+        val lngRef =
+            databaseReference.child("Agents").child(userSessionManager.getAgentUId()).child("customerCount")
+
+        lngRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val snapshot = task.result
+                if(snapshot.value !=null) { //check if the key customerCount Exist
+                    Log.e("TAG","customer count::"+snapshot.value)
+                    var cnt=snapshot.value.toString()
+                    userSessionManager.setCustomerCount(cnt.toInt())
+                    /*for (ds in snapshot.children) {
+                        Log.e("TAG", "customer ::" + ds.key.toString())
+//                    productIdList.add(ds.key.toString())
+                        *//* if (ds.key.toString() == "quantity") {
+                         holder.quantity.text = "${ds.getValue(Int::class.java)!!}"
+                         count = ds.getValue(Int::class.java)!!
+                     }*//*
+                    }*/
+                }else{
+                    lngRef.setValue(0) //if customerCount null then setting its value as 0
+                }
+
+            } else {
+                Log.e("TAG customer", task.exception!!.message!!) //Don't ignore potential errors!
+
+            }
+        }
+
+
+
+    }
+    //for firebase
+    private fun initializeDbRef() {
+        databaseReference = Firebase.database.reference
     }
     private fun onLogOutClicked() {
         auth.signOut()

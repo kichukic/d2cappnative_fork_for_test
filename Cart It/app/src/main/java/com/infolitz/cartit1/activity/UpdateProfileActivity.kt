@@ -13,7 +13,7 @@ import com.infolitz.cartit1.helper.UserSessionManager
 
 class UpdateProfileActivity : AppCompatActivity() {
     lateinit var updateProfileBinding: ActivityUpdateProfileBinding
-    private lateinit var userMobile: String
+    private lateinit var agentMobile: String
     //for shared pref
     private lateinit var userSessionManager: UserSessionManager
     //for firebase
@@ -24,7 +24,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         updateProfileBinding= ActivityUpdateProfileBinding.inflate(layoutInflater)
         setContentView(updateProfileBinding.root)
 
-        userMobile = intent.getStringExtra("mobile_number").toString()
+        agentMobile = intent.getStringExtra("mobile_number").toString()
 
         initNumber()
         initSharedPref()
@@ -37,8 +37,8 @@ class UpdateProfileActivity : AppCompatActivity() {
         updateProfileBinding.btUpdateProfile.setOnClickListener{
 
             if (!isnull(updateProfileBinding.etUserName.text.toString(),updateProfileBinding.etMailId.text.toString())) {
-                userSessionManager.setUserName(updateProfileBinding.etUserName.text.toString())
-                userSessionManager.setUserEmail(updateProfileBinding.etMailId.text.toString())
+                userSessionManager.setAgentName(updateProfileBinding.etUserName.text.toString())
+                userSessionManager.setAgentEmail(updateProfileBinding.etMailId.text.toString())
                 writeDataToFirebase()
 
                 val intent = Intent(this, MainActivity::class.java)
@@ -48,12 +48,12 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun initNumber() {
-        updateProfileBinding.tvMobileNumber.text=userMobile
+        updateProfileBinding.tvMobileNumber.text=agentMobile
     }
     private fun writeDataToFirebase() {
-        var userReference = databaseReference.child("Users").child(userSessionManager.getUserUId())
-        userReference.child("userName").setValue(userSessionManager.getUserName())
-        userReference.child("userEmail").setValue(userSessionManager.getUserEmail())
+        var userReference = databaseReference.child("Agents").child(userSessionManager.getAgentUId())
+        userReference.child("agentName").setValue(userSessionManager.getAgentName())
+        userReference.child("agentEmail").setValue(userSessionManager.getAgentEmail())
     }
 
     private fun initSharedPref() {
