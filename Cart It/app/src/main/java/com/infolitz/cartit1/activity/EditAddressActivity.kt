@@ -40,21 +40,21 @@ class EditAddressActivity : AppCompatActivity() {
 
     private fun getCustomerAddressHistory() {
         val lngRef =
-            databaseReference.child("Users").child("ct"+binding.addressPhoneEditText.text)
+            databaseReference.child("Customers").child("ct"+binding.addressPhoneEditText.text)
 
         lngRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
                 if(snapshot.value !=null) { //check if the key customerCount Exist
                     Log.e("TAG","customer Address"+snapshot.value)
-                    Log.e("TAG","customer first name"+snapshot.child("uFirstName").value.toString())
-                    Log.e("TAG","customer uLastName"+snapshot.child("uLastName").value.toString())
-                    Log.e("TAG","customer uMobile"+snapshot.child("uMobile").value.toString())
-                    Log.e("TAG","customer uStreetAddress"+snapshot.child("uStreetAddress").value.toString())
-                    Log.e("TAG","customer uStreetAddress2"+snapshot.child("uStreetAddress2").value.toString())
-                    Log.e("TAG","customer uCity"+snapshot.child("uCity").value.toString())
-                    Log.e("TAG","customer uState"+snapshot.child("uState").value.toString())
-                    Log.e("TAG","customer uPin"+snapshot.child("uPin").value.toString())
+                    Log.e("TAG","customer first name"+snapshot.child("firstName").value.toString())
+                    Log.e("TAG","customer uLastName"+snapshot.child("lastName").value.toString())
+                    Log.e("TAG","customer uMobile"+snapshot.child("mobile").value.toString())
+                    Log.e("TAG","customer uStreetAddress"+snapshot.child("streetAddress").value.toString())
+                    Log.e("TAG","customer uStreetAddress2"+snapshot.child("streetAddress2").value.toString())
+                    Log.e("TAG","customer uCity"+snapshot.child("city").value.toString())
+                    Log.e("TAG","customer uState"+snapshot.child("state").value.toString())
+                    Log.e("TAG","customer uPin"+snapshot.child("pin").value.toString())
 
 
                     binding.fetchUserData.text="Data found!!"
@@ -62,14 +62,15 @@ class EditAddressActivity : AppCompatActivity() {
                     binding.fetchUserData.setTextColor(ContextCompat.getColor(this,R.color.green))
 
 
-                    binding.addressFirstNameEditText.setText(snapshot.child("uFirstName").value.toString())
-                    binding.addressLastNameEditText.setText(snapshot.child("uLastName").value.toString())
-                    binding.addressPhoneEditText.setText(snapshot.child("uMobile").value.toString())
-                    binding.addressStreetAddEditText.setText(snapshot.child("uStreetAddress").value.toString())
-                    binding.addressStreetAdd2EditText.setText(snapshot.child("uStreetAddress2").value.toString())
-                    binding.addressCityEditText.setText(snapshot.child("uCity").value.toString())
-                    binding.addressStateEditText.setText(snapshot.child("uState").value.toString())
-                    binding.addressPincodeEditText.setText(snapshot.child("uPin").value.toString())
+                    binding.addressFirstNameEditText.setText(snapshot.child("firstName").value.toString())
+                    binding.addressLastNameEditText.setText(snapshot.child("lastName").value.toString())
+                    binding.addressPhoneEditText.setText(snapshot.child("mobile").value.toString())
+                    binding.addressStreetAddEditText.setText(snapshot.child("streetAddress").value.toString())
+                    binding.addressStreetAdd2EditText.setText(snapshot.child("streetAddress2").value.toString())
+                    binding.addressCityEditText.setText(snapshot.child("city").value.toString())
+                    binding.addressStateEditText.setText(snapshot.child("state").value.toString())
+                    binding.addressPincodeEditText.setText(snapshot.child("pin").value.toString())
+
 
                     binding.loaderLayout.loaderFrameLayout.visibility=View.GONE
                     binding.loaderLayout.loaderFrameLayout.visibility=View.INVISIBLE
@@ -125,19 +126,23 @@ class EditAddressActivity : AppCompatActivity() {
             userSessionManager.setCustomerCount(userSessionManager.getCustomerCount() + 1)
 
         var agentReference = databaseReference.child("Agents").child(userSessionManager.getAgentUId())
-        var userReference = databaseReference.child("Users").child("ct"+binding.addressPhoneEditText.text)
+        var userReference = databaseReference.child("Customers").child("ct"+binding.addressPhoneEditText.text)
 
         agentReference.child("customerCount").setValue(userSessionManager.getCustomerCount()) //increment customercount in agent db
 
 
-        userReference.child("uFirstName").setValue(binding.addressFirstNameEditText.text.toString())
-        userReference.child("uLastName").setValue(binding.addressLastNameEditText.text.toString())
-        userReference.child("uMobile").setValue(binding.addressPhoneEditText.text.toString())
-        userReference.child("uStreetAddress").setValue(binding.addressStreetAddEditText.text.toString())
-        userReference.child("uStreetAddress2").setValue(binding.addressStreetAdd2EditText.text.toString())
-        userReference.child("uCity").setValue(binding.addressCityEditText.text.toString())
-        userReference.child("uState").setValue(binding.addressStateEditText.text.toString())
-        userReference.child("uPin").setValue(binding.addressPincodeEditText.text.toString())
+        userReference.child("firstName").setValue(binding.addressFirstNameEditText.text.toString())
+        userReference.child("lastName").setValue(binding.addressLastNameEditText.text.toString())
+        userReference.child("mobile").setValue(binding.addressPhoneEditText.text.toString())
+        userReference.child("streetAddress").setValue(binding.addressStreetAddEditText.text.toString())
+        userReference.child("streetAddress2").setValue(binding.addressStreetAdd2EditText.text.toString())
+        userReference.child("city").setValue(binding.addressCityEditText.text.toString())
+        userReference.child("state").setValue(binding.addressStateEditText.text.toString())
+        userReference.child("pin").setValue(binding.addressPincodeEditText.text.toString())
+
+        userReference.child("referredAgentId").setValue(userSessionManager.getAgentUId())
+
+
 
         //saving the current customer address to shared preference
         userSessionManager.saveCurrentCustomerData(binding.addressFirstNameEditText.text.toString(),

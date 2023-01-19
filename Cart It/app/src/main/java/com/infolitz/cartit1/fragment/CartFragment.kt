@@ -65,7 +65,9 @@ class CartFragment : Fragment() {
         userSessionManager = UserSessionManager(requireActivity())
     }
 
-    private fun initAllProductID() {//for getting the productids under the present user
+     fun initAllProductID() {//for getting the productids under the present user
+
+        data.clear()//making the arraylist empty
         val lngRef =
             databaseReference.child("Agents").child(userSessionManager.getAgentUId()).child("cart")
 
@@ -208,6 +210,7 @@ class CartFragment : Fragment() {
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             CartFragment().apply {
+//                initAllProductID()
             }
     }
 

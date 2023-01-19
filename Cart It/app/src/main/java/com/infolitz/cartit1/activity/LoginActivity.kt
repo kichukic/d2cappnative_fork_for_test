@@ -48,6 +48,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(activityLoginBinding.root)
+
+        if (supportActionBar != null) {
+            supportActionBar?.hide(); //to hide actionbar
+        }
+
 //        setContentView(R.layout.activity_login)
         Log.e("my_fire", "main run")
 
@@ -69,6 +74,7 @@ class LoginActivity : AppCompatActivity() {
         auth = Firebase.auth // Initialize Firebase Auth
         activityLoginBinding.tvResendOtp.isEnabled=false//resend button disabled
         activityLoginBinding.rlResendOtp.visibility = View.INVISIBLE//resend button disabled
+        activityLoginBinding.llEtEnterOtp.visibility=View.GONE
 
         // Initialize phone auth callbacks
         // [START phone_auth_callbacks]
@@ -112,6 +118,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun runTimerForOTP() {
         activityLoginBinding.rlResendOtp.visibility = View.VISIBLE //visible resend button
+        activityLoginBinding.llEtEnterOtp.visibility=View.VISIBLE
         activityLoginBinding.tvResendOtp.isEnabled= true
         cTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {

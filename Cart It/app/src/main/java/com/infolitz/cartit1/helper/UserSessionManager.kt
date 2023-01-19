@@ -2,7 +2,7 @@ package com.infolitz.cartit1.helper
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.Uri
+import com.google.gson.Gson
 
 class UserSessionManager(context: Context) {
 
@@ -30,6 +30,17 @@ class UserSessionManager(context: Context) {
     private val custCity1 ="cc"
     private val custState1 ="cs"
     private val custPin1 ="cp"
+
+    private val product_id="pi1234"
+    private val quantity="10"
+
+    fun saveCartProductDetails(item :ArrayList<CartProductDetailsModel>){
+        val gson = Gson()
+        val json: String = gson.toJson(item)
+        val editor = sharedPreferences.edit()
+        editor.putString("cartItems",   json)
+        editor.apply()
+    }
 
     fun saveCurrentCustomerData(custFirstName: String?,
                                 custLastName: String?,

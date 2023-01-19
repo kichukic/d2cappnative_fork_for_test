@@ -3,16 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/bg_linear_corner_rounded.xml" value="0.116" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/dotted_line_drawable.xml" value="0.116" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_add_24.xml" value="0.13" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_delete_24.xml" value="0.13" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_edit_24.xml" value="0.13" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_filled_check_circle_24.xml" value="0.116" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.116" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_message_resend_otp.xml" value="0.116" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_remove_24.xml" value="0.13" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/ic_user_profile.xml" value="0.13" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/layout_background_rounded_corners.xml" value="0.13" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable-v24/round_button.xml" value="0.13" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable/bg_border_around.xml" value="0.116" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable/bg_gradient_blue.xml" value="0.12" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable/bg_strike_offer.xml" value="0.13" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable/ic_nav_log_out.xml" value="0.116" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/drawable/ic_nav_shopping_cart.xml" value="0.116" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_edit_address.xml" value="0.16354166666666667" />
-        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_main.xml" value="0.16354166666666667" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_order_details.xml" value="0.16666666666666666" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/activity_product_descrip.xml" value="0.16354166666666667" />
@@ -22,7 +31,9 @@
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/fragment_home.xml" value="0.16354166666666667" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/fragment_settings.xml" value="0.16354166666666667" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/grid_layout_home.xml" value="0.16354166666666667" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/layout_ask_payment_method.xml" value="0.22" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/layout_circular_loader.xml" value="0.16354166666666667" />
+        <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/layout_order_placed_success.xml" value="0.1625" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/layout_price_card.xml" value="0.3333333333333333" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/layout_shipping_card.xml" value="0.3333333333333333" />
         <entry key="..\:/Android Infolitz_ NP/Cart It1/Cart It/app/src/main/res/layout/list_exp_data.xml" value="0.16354166666666667" />

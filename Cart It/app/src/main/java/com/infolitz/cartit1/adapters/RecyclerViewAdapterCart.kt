@@ -17,7 +17,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.infolitz.cartit1.R
+import com.infolitz.cartit1.activity.LoginActivity
+import com.infolitz.cartit1.activity.OrderDetailsActivity
 import com.infolitz.cartit1.activity.ProductDescripActivity
+import com.infolitz.cartit1.fragment.CartFragment
 import com.infolitz.cartit1.helper.ProductViewModal
 import com.infolitz.cartit1.helper.UserSessionManager
 import com.infolitz.cartit1.helper.getGlideProgress
@@ -28,12 +31,27 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
     lateinit var userSessionManager: UserSessionManager
     private lateinit var databaseReference: DatabaseReference
 
+    lateinit var cartQuantity:ArrayList<Int> //= arrayListOf() list of quantity
+    lateinit var priceCartQuantity:ArrayList<Double> //= arrayListOf() list of price of product multiplied
+    lateinit var nameOfProductList:ArrayList<String>
+    lateinit var productIdList:ArrayList<String>
+    lateinit var storeIdList:ArrayList<String>
+
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // inflates the card_view_design view
         // that is used to hold list item
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.recyclerview_cart_data, parent, false)
+
+        cartQuantity= ArrayList<Int>()
+        priceCartQuantity=ArrayList<Double>()
+        nameOfProductList=ArrayList<String>()
+        productIdList=ArrayList<String>()
+        storeIdList=ArrayList<String>()
+   /*     sumCartQuantity= arrayListOf<Int>()
+        priceCartQuantity=arrayListOf<Double>()*/
+
 
         initSharedPref()
         initializeDbRef()
@@ -69,6 +87,10 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
 
         // sets the text to the textview from our itemHolder class
         holder.productName.text = itemsViewModel.productName
+        nameOfProductList.add(itemsViewModel.productName.toString()) //quantity taken to array list
+        productIdList.add(itemsViewModel.productId.toString()) //quantity taken to array list
+        storeIdList.add(itemsViewModel.storeId.toString()) //quantity taken to array list
+
         holder.productPrice.text = "${itemsViewModel.price}"
 
 
@@ -79,15 +101,26 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
         lngRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 val snapshot = task.result
+
                 for (ds in snapshot.children) {
                     if (ds.key.toString() == "quantity") {
                         holder.quantity.text = "${ds.getValue(Int::class.java)!!}" //setting the count value
                         count = ds.getValue(Int::class.java)!!
+
+
                     }
+                }
+
+                cartQuantity.add(count.toInt()) //quantity taken to array list
+                priceCartQuantity.add(itemsViewModel.price * cartQuantity[position])//
+                if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
+                    (context as OrderDetailsActivity).initPaymentDetails(cartQuantity,priceCartQuantity,nameOfProductList,productIdList,storeIdList)
+                    Log.e("OrderDetails activity","cleared success")
                 }
 
             } else {
                 Log.e("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+
             }
         }
 
@@ -96,6 +129,15 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
             holder.quantity.text = "$count"
             databaseReference.child("Agents").child(userSessionManager.getAgentUId()).child("cart")
                 .child(itemsViewModel.productId).child("quantity").setValue(count)
+
+
+            //
+            cartQuantity[position]= cartQuantity[position] + 1
+            priceCartQuantity[position]=itemsViewModel.price * cartQuantity[position]//
+            if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
+                (context as OrderDetailsActivity).initPaymentDetails(cartQuantity,priceCartQuantity,nameOfProductList,productIdList,storeIdList)
+                Log.e("OrderDetails activity","cleared success")
+            }
 
         }
         holder.minusImageButton.setOnClickListener {
@@ -106,6 +148,13 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
                     .child("cart")
                     .child(itemsViewModel.productId).child("quantity")
                     .setValue(count) //update to firebase
+
+                cartQuantity[position]= cartQuantity[position] - 1
+                priceCartQuantity[position]=itemsViewModel.price * cartQuantity[position]//
+                if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
+                    (context as OrderDetailsActivity).initPaymentDetails(cartQuantity,priceCartQuantity,nameOfProductList,productIdList,storeIdList)
+                    Log.e("OrderDetails activity","cleared success")
+                }
             }
 
         }
@@ -120,16 +169,33 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
                 .child("cart")
                 .child(itemsViewModel.productId).removeValue()
 
-            this.mList
+            /*this.mList
 
-//            mList.remove(position)
+            mList.remove(position)
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, itemCount)
+            setData(this)*/
+
+            if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
+                (context as OrderDetailsActivity).initAllProductID()
+                Log.e("OrderDetails activity","cleared success")
+            }else
+            /*if (context is CartFragment)*/ {
+                Log.e("CartFragment activity","cleared success")
+                mList.drop(position)
+                notifyItemRemoved(position)
+                notifyItemRangeChanged(position, itemCount)
+//                notifyItemChanged(position)
+                this.notifyDataSetChanged()
+            }
 
         }
 
 
+
+
     }
+
 
     // return the number of the items in the list
     override fun getItemCount(): Int {
@@ -149,6 +215,7 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
     }
 
     fun setData(data: List<ProductViewModal>) {
+
         mList = data
         notifyDataSetChanged()
         // where this.data is the recyclerView's dataset you are

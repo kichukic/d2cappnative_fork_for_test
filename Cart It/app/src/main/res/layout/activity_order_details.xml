@@ -23,7 +23,7 @@
                 android:id="@+id/order_details_constraint_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="order_details_payment_label_tv,
+                app:constraint_referenced_ids="order_details_payment_method_label_tv,ask_payment_method_layout,order_details_payment_label_tv,
                 order_details_pro_label_tv,order_details_ship_label_tv,
                 order_details_payment_layout,order_details_shipping_add_layout,
                 order_details_pro_recycler_view,order_change_status_btn" />
@@ -129,7 +129,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/order_details_payment_label_tv" />
 
+            <TextView
+                android:id="@+id/order_details_payment_method_label_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:text="Payment Method"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_details_payment_layout" />
+
+            <include
+                android:id="@+id/ask_payment_method_layout"
+                layout="@layout/layout_ask_payment_method"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_details_payment_method_label_tv" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/continue_payment_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/blue_accent_300"
+        android:padding="16dp"
+        android:text="Continue To Payment"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>

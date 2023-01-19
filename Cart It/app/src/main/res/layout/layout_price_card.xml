@@ -34,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/price_items_label_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/price_items_label_tv"
-            tools:text="$123.45" />
+            tools:text="₹123.45" />
 
         <TextView
             android:id="@+id/price_shipping_label_tv"
