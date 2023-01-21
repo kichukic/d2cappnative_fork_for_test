@@ -1,134 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.LoginActivity">
 
-    <LinearLayout
+    <include
+        android:id="@+id/loader_layout"
+        layout="@layout/layout_circular_loader"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:background="@drawable/bg_gradient_blue"
-        android:gravity="center">
-<!--  android:background="@drawable/bg_gradient_blue"-->
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:src="@drawable/app_imgg" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="-40dp"
-        android:layout_weight="1"
-        android:background="@drawable/bg_linear_corner_rounded" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="1dp"
-        android:layout_weight="5"
-        android:gravity="center_horizontal"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
 
-            android:gravity="center_horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:background="@drawable/bg_gradient_blue"
+            android:gravity="center">
+
+            <!--  android:background="@drawable/bg_gradient_blue"-->
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/app_imgg" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="-40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_linear_corner_rounded" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="1dp"
+            android:layout_weight="5"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+
+                android:gravity="center_horizontal">
 
 
-            <TextView
-                android:id="@+id/tv_verify_mobile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:fontFamily="@font/nunito_bold"
-                android:gravity="center_horizontal"
-                android:text="@string/verify_your_mobile_number"
-                android:textSize="14dp" />
-
-            <LinearLayout
-                android:id="@+id/ll_tv_mobile_number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_verify_mobile"
-                android:layout_centerHorizontal="true">
-                <!-- <TextView
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_verify_mobile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:fontFamily="@font/nunito_light"
-                    android:lines="1"
-                    android:text="+91"/>
-            <EditText
-                android:id="@+id/et_mobile_number"
-                android:layout_width="0dp"
-                android:layout_weight="30"
-                android:layout_height="wrap_content"
-                android:hint="9876543210"
-                android:nextFocusDown="@+id/et_otp1"
-                android:fontFamily="@font/nunito_light"
-                android:layout_below="@+id/tv_verify_mobile"
-                android:inputType="phone"
-                android:lines="1"
-                android:maxLength="10" />-->
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/mobileOutlinedTextField"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginTop="0dp"
+                    android:fontFamily="@font/nunito_bold"
+                    android:gravity="center_horizontal"
+                    android:text="@string/verify_your_mobile_number"
+                    android:textSize="14dp" />
+
+                <LinearLayout
+                    android:id="@+id/ll_tv_mobile_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_verify_mobile"
-                    android:layout_marginTop="16dp"
-                    android:hint="Mobile Number"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:placeholderText="Enter the Mobile Number">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/et_mobile_number"
+                    android:layout_centerHorizontal="true">
+                    <!-- <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:fontFamily="@font/nunito_light"
+                        android:lines="1"
+                        android:text="+91"/>
+                <EditText
+                    android:id="@+id/et_mobile_number"
+                    android:layout_width="0dp"
+                    android:layout_weight="30"
+                    android:layout_height="wrap_content"
+                    android:hint="9876543210"
+                    android:nextFocusDown="@+id/et_otp1"
+                    android:fontFamily="@font/nunito_light"
+                    android:layout_below="@+id/tv_verify_mobile"
+                    android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="10" />-->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/mobileOutlinedTextField"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="10"
-                        android:gravity="center"
-                        android:paddingTop="12dp"
-                        android:paddingBottom="12dp" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:layout_below="@+id/tv_verify_mobile"
+                        android:layout_marginTop="16dp"
+                        android:hint="Mobile Number"
+                        app:expandedHintEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:placeholderText="Enter the Mobile Number">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_mobile_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:inputType="phone"
+                            android:maxLength="10"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_et_enter_otp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_tv_mobile_number"
-                android:layout_marginTop="16dp"
-                android:visibility="gone"
-                android:gravity="center"
-                android:layout_centerHorizontal="true"
-                android:orientation="horizontal">
-
-               <!-- <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
+                <LinearLayout
+                    android:id="@+id/ll_et_enter_otp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_below="@+id/ll_tv_mobile_number"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="16dp"
-                    >-->
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <!-- <com.google.android.material.textfield.TextInputLayout
+                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                         android:layout_width="40dp"
+                         android:layout_height="wrap_content"
+                         android:gravity="center"
+                         android:layout_marginTop="16dp"
+                         >-->
 
                     <!--<com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_otp1"
@@ -143,257 +156,259 @@
                         android:id="@+id/et_otp1"
                         android:layout_width="36dp"
                         android:layout_height="43dp"
+                        android:background="@drawable/bg_border_around"
                         android:gravity="center"
                         android:inputType="number"
-                        android:background="@drawable/bg_border_around"
                         android:maxLength="1"
                         android:textSize="20sp" />
-          <!--      </com.google.android.material.textfield.TextInputLayout>-->
+                    <!--      </com.google.android.material.textfield.TextInputLayout>-->
 
 
+                    <!--<EditText
+                        android:id="@+id/et_otp1"
+                        android:layout_width="35dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />-->
 
-                <!--<EditText
-                    android:id="@+id/et_otp1"
-                    android:layout_width="35dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:textSize="20sp" />-->
 
+                    <!--         <com.google.android.material.textfield.TextInputLayout
+                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                 android:layout_width="40dp"
+                                 android:layout_height="wrap_content"
+                                 android:gravity="center"
+                                 android:padding="3dp"
+                                 android:layout_marginTop="16dp"
+                                 app:expandedHintEnabled="false"
+                                 app:layout_constraintEnd_toEndOf="parent"
+                                 app:layout_constraintStart_toStartOf="parent"
+                                 android:layout_marginLeft="1dp"
+                                 android:layout_marginRight="1dp"
+                                 >
 
-       <!--         <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:layout_marginTop="16dp"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
+                                 <com.google.android.material.textfield.TextInputEditText
+                                     android:id="@+id/et_otp2"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:inputType="phone"
+                                     android:maxLength="1"
+                                     android:gravity="center"
+                                     android:textSize="12sp"
+                                     />
+                             </com.google.android.material.textfield.TextInputLayout>
+             -->
+                    <EditText
                         android:id="@+id/et_otp2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="1"
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
                         android:gravity="center"
-                        android:textSize="12sp"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
--->
-                <EditText
-                    android:id="@+id/et_otp2"
-                    android:layout_width="36dp"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:layout_marginStart="5dp"
-                    android:background="@drawable/bg_border_around"
-                    android:textSize="20sp" />
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />
 
-             <!--   <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:layout_marginTop="16dp"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    >
+                    <!--   <com.google.android.material.textfield.TextInputLayout
+                           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                           android:layout_width="40dp"
+                           android:layout_height="wrap_content"
+                           android:gravity="center"
+                           android:padding="3dp"
+                           android:layout_marginTop="16dp"
+                           app:expandedHintEnabled="false"
+                           app:layout_constraintEnd_toEndOf="parent"
+                           app:layout_constraintStart_toStartOf="parent"
+                           android:layout_marginLeft="1dp"
+                           android:layout_marginRight="1dp"
+                           >
 
-                    <com.google.android.material.textfield.TextInputEditText
+                           <com.google.android.material.textfield.TextInputEditText
+                               android:id="@+id/et_otp3"
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:inputType="phone"
+                               android:maxLength="1"
+                               android:gravity="center"
+                               android:textSize="12sp"
+                                />
+                       </com.google.android.material.textfield.TextInputLayout>-->
+
+                    <EditText
                         android:id="@+id/et_otp3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="1"
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
                         android:gravity="center"
-                        android:textSize="12sp"
-                         />
-                </com.google.android.material.textfield.TextInputLayout>-->
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/et_otp3"
-                    android:layout_width="36dp"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:layout_marginStart="5dp"
-                    android:inputType="number"
-                    android:background="@drawable/bg_border_around"
-                    android:maxLength="1"
-                    android:textSize="20sp" />
+                    <!--  <com.google.android.material.textfield.TextInputLayout
+                          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                          android:layout_width="40dp"
+                          android:layout_height="wrap_content"
+                          android:gravity="center"
+                          android:padding="3dp"
+                          android:layout_marginTop="16dp"
+                          app:expandedHintEnabled="false"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          app:layout_constraintStart_toStartOf="parent"
+                          android:layout_marginLeft="1dp"
+                          android:layout_marginRight="1dp"
+                          >
 
-              <!--  <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:layout_marginTop="16dp"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    >
+                          <com.google.android.material.textfield.TextInputEditText
+                              android:id="@+id/et_otp4"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:inputType="phone"
+                              android:maxLength="1"
+                              android:gravity="center"
+                              android:textSize="12sp"
+                              />
+                      </com.google.android.material.textfield.TextInputLayout>-->
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/et_otp4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="1"
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
                         android:gravity="center"
-                        android:textSize="12sp"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>-->
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/et_otp4"
-                    android:layout_width="36dp"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:layout_marginStart="5dp"
-                    android:maxLength="1"
-                    android:background="@drawable/bg_border_around"
-                    android:textSize="20sp" />
+                    <!-- <com.google.android.material.textfield.TextInputLayout
+                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                         android:layout_width="40dp"
+                         android:layout_height="wrap_content"
+                         android:gravity="center"
+                         android:padding="3dp"
+                         android:layout_marginTop="16dp"
+                         app:expandedHintEnabled="false"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         android:layout_marginLeft="1dp"
+                         android:layout_marginRight="1dp"
+                         >
 
-               <!-- <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:layout_marginTop="16dp"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    >
+                         <com.google.android.material.textfield.TextInputEditText
+                             android:id="@+id/et_otp5"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:inputType="phone"
+                             android:maxLength="1"
+                             android:textSize="12sp"
+                             android:gravity="center"
+                              />
+                     </com.google.android.material.textfield.TextInputLayout>-->
 
-                    <com.google.android.material.textfield.TextInputEditText
+
+                    <EditText
                         android:id="@+id/et_otp5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="1"
-                        android:textSize="12sp"
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
                         android:gravity="center"
-                         />
-                </com.google.android.material.textfield.TextInputLayout>-->
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />
+
+                    <!-- <com.google.android.material.textfield.TextInputLayout
+                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                         android:layout_width="40dp"
+                         android:layout_height="wrap_content"
+                         android:gravity="center"
+                         android:padding="3dp"
+                         android:layout_marginTop="16dp"
+                         app:expandedHintEnabled="false"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         android:layout_marginLeft="1dp"
+                         android:layout_marginRight="1dp"
+                         >
+
+                         <com.google.android.material.textfield.TextInputEditText
+                             android:id="@+id/et_otp6"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:inputType="phone"
+                             android:maxLength="1"
+                             android:textSize="12sp"
+                             android:gravity="center" />
+                     </com.google.android.material.textfield.TextInputLayout>-->
 
 
-                <EditText
-                    android:id="@+id/et_otp5"
-                    android:layout_width="36dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:background="@drawable/bg_border_around"
-                    android:maxLength="1"
-                    android:textSize="20sp" />
-
-               <!-- <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:layout_marginTop="16dp"
-                    app:expandedHintEnabled="false"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    >
-
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
                         android:id="@+id/et_otp6"
+                        android:layout_width="36dp"
+                        android:layout_height="43dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
+                        android:gravity="center"
+                        android:imeOptions="actionDone"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_resend_otp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/ll_et_enter_otp"
+                    android:layout_marginTop="15dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_resend_otp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:maxLength="1"
-                        android:textSize="12sp"
-                        android:gravity="center" />
-                </com.google.android.material.textfield.TextInputLayout>-->
+                        android:layout_marginLeft="30dp"
+                        android:drawableLeft="@drawable/ic_message_resend_otp"
+                        android:fontFamily="@font/nunito_light"
+                        android:text=" Resend OTP" />
 
+                    <TextView
+                        android:id="@+id/tv_otp_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/nunito_light"
+                        android:paddingEnd="20dp"
+                        android:text="00:00 sec" />
+                </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/et_otp6"
-                    android:layout_width="36dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_height="43dp"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:maxLength="1"
-                    android:background="@drawable/bg_border_around"
-                    android:imeOptions="actionDone"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_resend_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ll_et_enter_otp"
-                android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/tv_resend_otp"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/bt_send_otp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:drawableLeft="@drawable/ic_message_resend_otp"
-                    android:fontFamily="@font/nunito_light"
-                    android:text=" Resend OTP" />
+                    android:layout_below="@+id/rl_resend_otp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/app_blue_007EED"
+                    android:text="Send OTP" />
 
-                <TextView
-                    android:id="@+id/tv_otp_timer"
-                    android:layout_width="wrap_content"
+                <Button
+                    android:id="@+id/bt_verify_otp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:fontFamily="@font/nunito_light"
-                    android:paddingEnd="20dp"
-                    android:text="00:00 sec" />
+                    android:layout_below="@+id/rl_resend_otp"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/app_blue_007EED"
+                    android:text="Verify OTP"
+                    android:visibility="gone" />
+
             </RelativeLayout>
 
-            <Button
-                android:id="@+id/bt_send_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_resend_otp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/app_blue_007EED"
-                android:text="Send OTP" />
-            <Button
-                android:id="@+id/bt_verify_otp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_resend_otp"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="@color/app_blue_007EED"
-                android:visibility="gone"
-                android:text="Verify OTP" />
+        </LinearLayout>
 
-        </RelativeLayout>
 
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>

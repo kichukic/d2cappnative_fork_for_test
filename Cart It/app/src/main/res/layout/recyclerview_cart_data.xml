@@ -25,7 +25,7 @@
                 android:id="@+id/img_view_cart_re"
                 android:layout_width="120dp"
                 android:layout_height="160dp"
-                android:src="@drawable/ic_user_profile" />
+                android:src="@drawable/ic_default_e_commerce" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -21,6 +21,7 @@ import com.infolitz.cartit1.activity.ProductDescripActivity
 import com.infolitz.cartit1.adapters.GridViewAdapterHome
 import com.infolitz.cartit1.databinding.FragmentHomeBinding
 import com.infolitz.cartit1.helper.ProductViewModal
+import com.infolitz.cartit1.helper.UserSessionManager
 
 
 class HomeFragment : Fragment() {
@@ -30,9 +31,12 @@ class HomeFragment : Fragment() {
     lateinit var gridView: GridView
     lateinit var itemList: List<ProductViewModal>
 
+    lateinit var userSessionManager: UserSessionManager
+
     lateinit var textViewOldPrice: TextView
     lateinit var textViewNewPrice: TextView
     lateinit var searchView: SearchView
+    val productIdInStoreList = ArrayList<String>()
 
     private lateinit var databaseReference: DatabaseReference
 
@@ -45,10 +49,13 @@ class HomeFragment : Fragment() {
         container?.removeAllViews()
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
-
+        initSharedPref()
         initializeDbRef()
-        initViewWithDBdata()
+
+        setPinCode()
+
+
+//        initViewWithDBdata()
         initSearch()
 
 
@@ -66,17 +73,145 @@ class HomeFragment : Fragment() {
         return binding?.root
     }
 
+    private fun setPinCode() {
+       val pinCode= userSessionManager.getAgentPinCode()
+        Log.e("current pincode is",":"+pinCode)
+        val lngRef =
+            databaseReference.child("PinCode").child(pinCode.toString())
+
+        lngRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val storeIdList = ArrayList<String>()
+                val snapshot = task.result
+                Log.e("TAG","storeid::"+snapshot.value) //storeid::{s1=sIdsId1673406243}
+                for (ds in snapshot.children) {
+                    Log.e("TAG","store_id::"+ds.value.toString())
+                    storeIdList.add(ds.value.toString())
+                    /* if (ds.key.toString() == "quantity") {
+                         holder.quantity.text = "${ds.getValue(Int::class.java)!!}"
+                         count = ds.getValue(Int::class.java)!!
+                     }*/
+                }
+                getProductIdFromStore(storeIdList)
+//                initRecyclerView(productIdList)
+
+            } else {
+                Log.e("TAG.", task.exception!!.message!!) //Don't ignore potential errors!
+            }
+        }
+
+    }
+
+    private fun getProductIdFromStore(storeIdList: ArrayList<String>) { //to get product id from store
+        productIdInStoreList.clear()
+        for (storeId in storeIdList){
+
+            val lngRef =
+                databaseReference.child("Store").child(storeId).child("avilProduct")
+
+            lngRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+//                    val storeIdList = ArrayList<String>()
+                    val snapshot = task.result
+                    Log.e("TAG","Product id array::"+snapshot.value) //Product id array::{proId1673406243={price=48, stock=4}, proId13245678={price=89, stock=2}}
+                    for (ds in snapshot.children) {
+                        Log.e("TAG","Product_id::"+ds.key.toString())
+                        productIdInStoreList.add(ds.key.toString())
+                        /* if (ds.key.toString() == "quantity") {
+                             holder.quantity.text = "${ds.getValue(Int::class.java)!!}"
+                             count = ds.getValue(Int::class.java)!!
+                         }*/
+                    }
+                    initViewWithDBdata(productIdInStoreList)
+
+                } else {
+                    Log.e("TAG.", task.exception!!.message!!) //Don't ignore potential errors!
+                }
+            }
+
+        }
+
+    }
+
     //firebase.....
     private fun initializeDbRef() {
         databaseReference = Firebase.database.reference
     }
 
-    private fun initViewWithDBdata() {
+    private fun initViewWithDBdata(productIdInStoreList:ArrayList<String>) {
         gridView = binding!!.gridView
+        itemList = ArrayList<ProductViewModal>()
 
 
+        for (productId in productIdInStoreList){
 
-        val lngRef = databaseReference.child("Products")
+            val lngRef = databaseReference.child("Products").child(productId)
+            lngRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+
+
+                    val snapshot = task.result
+
+//                val username = snapshot.child("username").getValue(String::class.java)
+//                Log.e("TAG", "productss12: ${snapshot.value}"+"from id " +productId)// getting values of Products
+
+                    val productId11= snapshot.key.toString()
+                    Log.e("TAG","product id ::"+productId11) //got product id
+
+                    val description = snapshot.child("description").getValue(String::class.java)
+                    Log.e("TAG","description ::"+description) //got description
+                    val imgUrl= snapshot.child("imgUrl").getValue(String::class.java)
+                    Log.e("TAG","imgUrl ::"+imgUrl) //got imgUrl
+                    val name = snapshot.child("name").getValue(String::class.java)
+                    Log.e("TAG","name ::"+name) //got name
+                    val price = snapshot.child("price").getValue(Double::class.java)
+                    Log.e("TAG","price ::"+price) //got price
+                    val stockCount = snapshot.child("stockCount").getValue(Int::class.java)
+                    Log.e("TAG","stockCount ::"+stockCount) //got stockCount
+                    val storeId = snapshot.child("storeId").getValue(String::class.java)
+                    Log.e("TAG","storeId ::"+storeId) //got storeId
+
+                    itemList = itemList + ProductViewModal(name!!,productId,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
+
+                    val itemAdapter = GridViewAdapterHome(itemList = itemList, requireActivity()) //initialising adapter
+                    gridView.adapter = itemAdapter
+
+                    /*      for (ds in snapshot.children) {
+                              val productId= ds.key.toString()
+                              Log.e("TAG","product id ::"+productId) //got product id
+
+                              val description = ds.child("description").getValue(String::class.java)
+                              Log.e("TAG","description ::"+description) //got description
+                              val imgUrl= ds.child("imgUrl").getValue(String::class.java)
+                              Log.e("TAG","imgUrl ::"+imgUrl) //got imgUrl
+                              val name = ds.child("name").getValue(String::class.java)
+                              Log.e("TAG","name ::"+name) //got name
+                              val price = ds.child("price").getValue(Double::class.java)
+                              Log.e("TAG","price ::"+price) //got price
+                              val stockCount = ds.child("stockCount").getValue(Int::class.java)
+                              Log.e("TAG","stockCount ::"+stockCount) //got stockCount
+                              val storeId = ds.child("storeId").getValue(String::class.java)
+                              Log.e("TAG","storeId ::"+storeId) //got storeId
+
+
+                              itemList = itemList + ProductViewModal(name!!,productId,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
+      //                    itemList = itemList + ProductViewModal(name!!,productId,availPin!!,description!!,price!!,stockCount!!, storeId!!,R.drawable.img_curry_powder_cumin)
+
+                          }*/
+
+              /*      val itemAdapter = GridViewAdapterHome(itemList = itemList, requireActivity()) //initialising adapter
+                    gridView.adapter = itemAdapter */ // on below line we are setting adapter to our grid view.
+
+                } else {
+                    Log.e("TAG", task.exception!!.message!!) //Don't ignore potential errors!
+                }
+            }
+
+        }
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////working code start
+        /*val lngRef = databaseReference.child("Products")
         lngRef.get().addOnCompleteListener { task ->
             if (task.isSuccessful) {
 
@@ -90,8 +225,8 @@ class HomeFragment : Fragment() {
                     val productId= ds.key.toString()
                     Log.e("TAG","product id ::"+productId) //got product id
 
-                    val availPin = ds.child("availPin").getValue(Int::class.java)
-                    Log.e("TAG","availPin ::"+availPin) //got availPin
+                   *//* val availPin = ds.child("availPin").getValue(Int::class.java)
+                    Log.e("TAG","availPin ::"+availPin) //got availPin*//*
 
                     val description = ds.child("description").getValue(String::class.java)
                     Log.e("TAG","description ::"+description) //got description
@@ -105,11 +240,11 @@ class HomeFragment : Fragment() {
                     Log.e("TAG","stockCount ::"+stockCount) //got stockCount
                     val storeId = ds.child("storeId").getValue(String::class.java)
                     Log.e("TAG","storeId ::"+storeId) //got storeId
-                    /*val imgUrl = ds.child("ImageUrl").getValue(String::class.java)
+                    *//*val imgUrl = ds.child("ImageUrl").getValue(String::class.java)
                     Log.e("imgurl", imgUrl.toString())
-                    arrayOfLang.add(LanguagesDashboard(ds.key.toString(), imgUrl))*/
+                    arrayOfLang.add(LanguagesDashboard(ds.key.toString(), imgUrl))*//*
 
-                    itemList = itemList + ProductViewModal(name!!,productId,availPin!!,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
+                    itemList = itemList + ProductViewModal(name!!,productId,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
 //                    itemList = itemList + ProductViewModal(name!!,productId,availPin!!,description!!,price!!,stockCount!!, storeId!!,R.drawable.img_curry_powder_cumin)
 
                 }
@@ -120,7 +255,8 @@ class HomeFragment : Fragment() {
             } else {
                 Log.e("TAG", task.exception!!.message!!) //Don't ignore potential errors!
             }
-        }
+        }*/
+        //////////////////////////////////////////////////////////////////////////////////////////////////////working code end
 
         gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ -> //onclicking the grid
             Toast.makeText(
@@ -246,5 +382,8 @@ class HomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+    }
+    private fun initSharedPref() {
+        userSessionManager = UserSessionManager(requireActivity())
     }
 }

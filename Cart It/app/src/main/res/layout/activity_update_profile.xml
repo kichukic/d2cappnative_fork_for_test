@@ -5,6 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.UpdateProfileActivity">
+    <include
+        android:id="@+id/loader_layout"
+        layout="@layout/layout_circular_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
 
     <RelativeLayout
         android:id="@+id/dashboardContent"
@@ -19,21 +25,21 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:orientation="vertical"
-            android:padding="60dp">
+            android:padding="56dp">
 
             <ImageView
                 android:id="@+id/iv_user_img"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_user_profile" />
+                android:src="@drawable/ic_agent_update_profile" />
 
             <TextView
                 android:id="@+id/tv_mobile_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/nunito_bold"
                 android:text="9876543210"
                 android:textColor="@color/black"
@@ -51,7 +57,37 @@
                 android:textSize="@dimen/normal_text_size" />-->
 
             <!--android:background="@drawable/background_border"-->
-            <EditText
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/agentNameOutlinedTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Name"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:placeholderText="Enter the Agent Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/et_user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!-- <EditText
                 android:id="@+id/et_user_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,9 +98,38 @@
                 android:hint="Name"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="14sp" />
+                android:textSize="14sp" />-->
 
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobileOutlinedTextField"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginEnd="3dp"
+                android:hint="Email"
+                app:expandedHintEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:placeholderText="Enter the Agent Email">
+
+                <com.google.android.material.textfield.TextInputEditText
+
+                    android:id="@+id/et_mail_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/nunito_medium"
+                    android:gravity="center"
+                    android:inputType="textEmailAddress"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--<EditText
                 android:id="@+id/et_mail_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +140,7 @@
                 android:hint="Email"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="16dp" />
+                android:textSize="16dp" />-->
 
             <!--<EditText
                 android:id="@+id/et_"

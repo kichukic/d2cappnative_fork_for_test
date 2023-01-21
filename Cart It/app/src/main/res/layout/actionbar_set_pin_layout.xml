@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/relativeLayout_setPin_actionBar"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal"
+    android:layout_gravity="right" >
+
+    <!-- Menu Item Image -->
+    <ImageView
+        android:id="@+id/img_view_nav_set_pin"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:clickable="true"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_pincode_pin_drop_24" />
+
+    <!-- Badge Count -->
+    <TextView
+        android:id="@+id/actionbar_notifcation_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:layout_alignParentRight="true"
+        android:fontFamily="@font/nunito_light"
+        android:layout_marginEnd="5dp"
+        android:textSize="16dp"
+        android:background="@color/app_blue_007EED"
+        android:text="Set Your Pin"
+        android:textColor="@color/white" />
+
+</LinearLayout>

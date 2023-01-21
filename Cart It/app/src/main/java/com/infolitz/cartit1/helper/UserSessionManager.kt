@@ -9,7 +9,7 @@ class UserSessionManager(context: Context) {
     private var sharedPreferences: SharedPreferences =
         context.getSharedPreferences("UserSharedPref", Context.MODE_PRIVATE)
 
-    private val isAgentLogedin = "isUserLoggedIn"
+    private val isAgentLogedin = "isAgentLoggedIn"
     private val mAgentEmail = "userEmail"
     private val mAgentName = "userName"
     private val mAgentImage = "userImage"
@@ -31,8 +31,21 @@ class UserSessionManager(context: Context) {
     private val custState1 ="cs"
     private val custPin1 ="cp"
 
+
+    private val agentPinCode ="agentPin"
+
     private val product_id="pi1234"
     private val quantity="10"
+
+    fun setIsAgentLoggedIn(value: Boolean) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean(isAgentLogedin, value)
+        editor.apply()
+    }
+
+    fun getIsAgentLoggedIn(): Boolean {
+        return sharedPreferences.getBoolean(isAgentLogedin, false)
+    }
 
     fun saveCartProductDetails(item :ArrayList<CartProductDetailsModel>){
         val gson = Gson()
@@ -123,6 +136,13 @@ class UserSessionManager(context: Context) {
     }
 
 
+    fun setAgentPinCode(value: Int) {
+        sharedPreferences.edit().putInt(agentPinCode, value).apply()
+    }
+    fun getAgentPinCode(): Int {
+        return sharedPreferences.getInt(agentPinCode, 0)!!
+    }
+
 
     fun getAgentImage(): String {
         return sharedPreferences.getString(mAgentImage, "")!!
@@ -136,15 +156,7 @@ class UserSessionManager(context: Context) {
         sharedPreferences.edit().putBoolean(mAgentFirstLogin, false).apply()
     }
 
-    fun setIsAgentLoggedIn(value: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(isAgentLogedin, value)
-        editor.apply()
-    }
 
-    fun getIsAgentLoggedIn(): Boolean {
-        return sharedPreferences.getBoolean(isAgentLogedin, false)
-    }
 
     fun clearData(applicationContext: Context?) {
         val editor = sharedPreferences.edit()

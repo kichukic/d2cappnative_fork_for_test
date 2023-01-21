@@ -46,8 +46,14 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        initSharedPref() //initializing session
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(activityLoginBinding.root)
+        if (userSessionManager.getIsAgentLoggedIn()) {
+            val intent = Intent(this, MainActivity::class.java) //if already logged go to main activity
+            startActivity(intent)
+        }else{
+            setContentView(activityLoginBinding.root)
+        }
 
         if (supportActionBar != null) {
             supportActionBar?.hide(); //to hide actionbar
@@ -58,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
 
 
         otpToEachET()
-        initSharedPref()
+
         initFirebase()
         initializeDbRef()
 
@@ -119,6 +125,7 @@ class LoginActivity : AppCompatActivity() {
     private fun runTimerForOTP() {
         activityLoginBinding.rlResendOtp.visibility = View.VISIBLE //visible resend button
         activityLoginBinding.llEtEnterOtp.visibility=View.VISIBLE
+        activityLoginBinding.loaderLayout.loaderFrameLayout.visibility=View.GONE //loader disabling
         activityLoginBinding.tvResendOtp.isEnabled= true
         cTimer = object : CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -139,13 +146,16 @@ class LoginActivity : AppCompatActivity() {
 
         activityLoginBinding.btSendOtp.setOnClickListener {
             startPhoneNumberVerification("+91" + /*"1234567890"*/activityLoginBinding.etMobileNumber.text)
+            activityLoginBinding.loaderLayout.loaderFrameLayout.visibility=View.VISIBLE
         }
 
         activityLoginBinding.btVerifyOtp.setOnClickListener {
+            activityLoginBinding.loaderLayout.loaderFrameLayout.visibility=View.VISIBLE //loader disabling
             verifyOTP()
         }
         activityLoginBinding.tvResendOtp.setOnClickListener {
             resendVerificationCode("+91" + activityLoginBinding.etMobileNumber.text,resendToken)//resend otp
+            activityLoginBinding.loaderLayout.loaderFrameLayout.visibility=View.VISIBLE
         }
     }
 
@@ -380,6 +390,7 @@ class LoginActivity : AppCompatActivity() {
                     writeDataToFirebase() //write to firebase
 
 
+                    userSessionManager.setIsAgentLoggedIn(true)
                     val intent = Intent(this, UpdateProfileActivity::class.java)
                     intent.putExtra("mobile_number", userSessionManager.getMobileNumber())
                     startActivity(intent)

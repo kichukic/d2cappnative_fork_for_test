@@ -20,7 +20,7 @@
                 android:id="@+id/pro_image_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_user_profile" />
+                android:src="@drawable/ic_default_e_commerce" />
 
         </LinearLayout>
         <LinearLayout

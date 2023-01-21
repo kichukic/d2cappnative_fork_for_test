@@ -282,8 +282,8 @@ class OrderDetailsActivity : AppCompatActivity() {
                     val productId = snapshot.key.toString()
                     Log.e("TAG", "product id ::" + productId) //got product id
 
-                    val availPin = snapshot.child("availPin").getValue(Int::class.java)
-                    Log.e("TAG", "availPin ::" + availPin) //got availPin
+                   /* val availPin = snapshot.child("availPin").getValue(Int::class.java)
+                    Log.e("TAG", "availPin ::" + availPin) //got availPin*/
 
                     val description = snapshot.child("description").getValue(String::class.java)
                     Log.e("TAG", "description ::" + description) //got description
@@ -302,7 +302,6 @@ class OrderDetailsActivity : AppCompatActivity() {
                         ProductViewModal(
                             name!!,
                             productId,
-                            availPin!!,
                             description!!,
                             price!!,
                             stockCount!!,

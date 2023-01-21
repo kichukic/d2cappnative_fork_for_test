@@ -3,6 +3,7 @@ package com.infolitz.cartit1.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
@@ -37,6 +38,9 @@ class UpdateProfileActivity : AppCompatActivity() {
         updateProfileBinding.btUpdateProfile.setOnClickListener{
 
             if (!isnull(updateProfileBinding.etUserName.text.toString(),updateProfileBinding.etMailId.text.toString())) {
+
+                updateProfileBinding.loaderLayout.loaderFrameLayout.visibility= View.VISIBLE //loader disabling
+
                 userSessionManager.setAgentName(updateProfileBinding.etUserName.text.toString())
                 userSessionManager.setAgentEmail(updateProfileBinding.etMailId.text.toString())
                 writeDataToFirebase()
@@ -48,7 +52,7 @@ class UpdateProfileActivity : AppCompatActivity() {
     }
 
     private fun initNumber() {
-        updateProfileBinding.tvMobileNumber.text=agentMobile
+        updateProfileBinding.tvMobileNumber.text=""+agentMobile
     }
     private fun writeDataToFirebase() {
         var userReference = databaseReference.child("Agents").child(userSessionManager.getAgentUId())
