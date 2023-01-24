@@ -3,6 +3,7 @@ package com.infolitz.cartit1.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.DatabaseReference
@@ -37,12 +38,14 @@ class UpdateProfileActivity : AppCompatActivity() {
     private fun initClicks() {
         updateProfileBinding.btUpdateProfile.setOnClickListener{
 
-            if (!isnull(updateProfileBinding.etUserName.text.toString(),updateProfileBinding.etMailId.text.toString())) {
+            if (!isnull(updateProfileBinding.etUserName.text.toString(),updateProfileBinding.etMailId.text.toString(),updateProfileBinding.etPinCode.text.toString())) {
 
                 updateProfileBinding.loaderLayout.loaderFrameLayout.visibility= View.VISIBLE //loader disabling
 
                 userSessionManager.setAgentName(updateProfileBinding.etUserName.text.toString())
                 userSessionManager.setAgentEmail(updateProfileBinding.etMailId.text.toString())
+                userSessionManager.setAgentPinCode(updateProfileBinding.etPinCode.text.toString().toInt())
+                Log.e("taggg",updateProfileBinding.etPinCode.text.toString())
                 writeDataToFirebase()
 
                 val intent = Intent(this, MainActivity::class.java)
@@ -58,6 +61,7 @@ class UpdateProfileActivity : AppCompatActivity() {
         var userReference = databaseReference.child("Agents").child(userSessionManager.getAgentUId())
         userReference.child("agentName").setValue(userSessionManager.getAgentName())
         userReference.child("agentEmail").setValue(userSessionManager.getAgentEmail())
+        userReference.child("agentPinCode").setValue(userSessionManager.getAgentPinCode())
     }
 
     private fun initSharedPref() {
@@ -66,11 +70,12 @@ class UpdateProfileActivity : AppCompatActivity() {
     private fun isnull(
         userName: String?,
         userEmail: String?,
+        pinCode: String?
     ): Boolean {
 
         var valueNull = true// true means null
         //check if the EditText have values or not
-        if ((userName?.trim()?.length!! > 0) && (userEmail?.trim()?.length!! > 0)) {
+        if ((userName?.trim()?.length!! > 0) && (userEmail?.trim()?.length!! > 0) && (pinCode?.trim()?.length!! > 0)) {
             valueNull = false// false means not null
         } else {
             Toast.makeText(applicationContext, "Please enter all data's! ", Toast.LENGTH_SHORT).show()

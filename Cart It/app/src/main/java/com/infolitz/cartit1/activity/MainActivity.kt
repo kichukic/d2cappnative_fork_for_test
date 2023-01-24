@@ -224,6 +224,7 @@ class MainActivity : AppCompatActivity() {
             val pinNumber=etPinNumber.text.toString().toInt()
             userSessionManager.setAgentPinCode(pinNumber)
             writeDataToFirebase(""+pinNumber)
+            initDrawer()
             alertDialog.dismiss()
         }
 

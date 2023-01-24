@@ -25,15 +25,16 @@
              android:layout_height="match_parent"
              android:gravity="center"
              android:text="home" />-->
-        <GridView
+<!--        <GridView-->
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/grid_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:numColumns="2"
-            android:horizontalSpacing="10dp"
-            android:padding="6dp"
-            android:layout_marginBottom="15sp"
-            android:verticalSpacing="10dp"
+            android:horizontalSpacing="1dp"
+            android:padding="2dp"
+            android:layout_marginBottom="1sp"
+            android:verticalSpacing="1dp"
             tools:listitem="@layout/grid_layout_home"
             />
 

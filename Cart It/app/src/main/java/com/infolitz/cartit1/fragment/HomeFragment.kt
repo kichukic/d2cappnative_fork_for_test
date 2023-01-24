@@ -9,27 +9,33 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.infolitz.cartit1.R
 import com.infolitz.cartit1.activity.ProductDescripActivity
 import com.infolitz.cartit1.adapters.GridViewAdapterHome
+import com.infolitz.cartit1.adapters.RecyclerViewAdapterCart
+import com.infolitz.cartit1.adapters.RecyclerViewHomeAdapter
 import com.infolitz.cartit1.databinding.FragmentHomeBinding
 import com.infolitz.cartit1.helper.ProductViewModal
 import com.infolitz.cartit1.helper.UserSessionManager
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
 
     private var binding: FragmentHomeBinding? = null
 
-    lateinit var gridView: GridView
+    lateinit var gridView: RecyclerView
+//    lateinit var gridView: GridView
     lateinit var itemList: List<ProductViewModal>
+
+    lateinit var tempArrayList: ArrayList<ProductViewModal> /// for searching purpose
+
+    lateinit var itemNameList: ArrayList<String>
 
     lateinit var userSessionManager: UserSessionManager
 
@@ -56,7 +62,7 @@ class HomeFragment : Fragment() {
 
 
 //        initViewWithDBdata()
-        initSearch()
+
 
 
 
@@ -140,10 +146,16 @@ class HomeFragment : Fragment() {
 
     private fun initViewWithDBdata(productIdInStoreList:ArrayList<String>) {
         gridView = binding!!.gridView
-        itemList = ArrayList<ProductViewModal>()
+//        itemList = ArrayList<ProductViewModal>()
+        itemList = arrayListOf<ProductViewModal>()
+
+        tempArrayList = arrayListOf<ProductViewModal>()
+
+        itemNameList =ArrayList<String>()
 
 
         for (productId in productIdInStoreList){
+            tempArrayList.clear()
 
             val lngRef = databaseReference.child("Products").child(productId)
             lngRef.get().addOnCompleteListener { task ->
@@ -164,6 +176,7 @@ class HomeFragment : Fragment() {
                     Log.e("TAG","imgUrl ::"+imgUrl) //got imgUrl
                     val name = snapshot.child("name").getValue(String::class.java)
                     Log.e("TAG","name ::"+name) //got name
+                    itemNameList.add(name!!)
                     val price = snapshot.child("price").getValue(Double::class.java)
                     Log.e("TAG","price ::"+price) //got price
                     val stockCount = snapshot.child("stockCount").getValue(Int::class.java)
@@ -171,10 +184,90 @@ class HomeFragment : Fragment() {
                     val storeId = snapshot.child("storeId").getValue(String::class.java)
                     Log.e("TAG","storeId ::"+storeId) //got storeId
 
+
+
+
+
+
+
+
+
+
                     itemList = itemList + ProductViewModal(name!!,productId,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
 
-                    val itemAdapter = GridViewAdapterHome(itemList = itemList, requireActivity()) //initialising adapter
-                    gridView.adapter = itemAdapter
+
+                    tempArrayList.addAll(itemList)
+
+                    //new adding
+                    val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2)
+                    gridView.layoutManager = mLayoutManager
+                    val adapter1 = RecyclerViewHomeAdapter(requireActivity(), itemList/*,quantity*/)
+                    gridView.adapter =adapter1   // Setting the Adapter with the recyclerview
+                    // new adding end
+
+
+
+                   /* val itemAdapter = GridViewAdapterHome(itemList = itemList, requireActivity()) //initialising adapter
+                    gridView.adapter = itemAdapter*/
+
+                    //search start.....................
+
+                    binding!!.searchViewHome.isSubmitButtonEnabled = true //side button enabled in  search button
+
+
+
+                   binding!!.searchViewHome.setOnQueryTextFocusChangeListener(object :SearchView.OnQueryTextListener,
+                        View.OnFocusChangeListener {
+                        override fun onQueryTextSubmit(query: String?): Boolean {
+                            // if query exist or not.
+                            if (itemNameList.contains(query)) {
+                                // if query exist within list we
+                                // are filtering our list adapter.
+                                Log.e("tag.1","found::"+query)
+                               /* adapter1.filter.filter(query)*/
+                            } else {
+                                // if query is not present we are displaying
+                                // a toast message as no  data found..
+                                Toast.makeText(requireActivity(), "No Language found..", Toast.LENGTH_LONG)
+                                    .show()
+                            }
+                            return false
+                        }
+
+                        override fun onQueryTextChange(newText: String?): Boolean {
+
+                            tempArrayList.clear()
+                            val searchText=newText!!.toLowerCase(Locale.getDefault())
+
+                            if (searchText.isNotEmpty()){
+                                itemList.forEach{
+
+                                     if (it.productName.toLowerCase(Locale.getDefault()).contains(searchText)){
+                                         tempArrayList.add(it)
+                                     }
+                                }
+
+                                gridView.adapter!!.notifyDataSetChanged()
+                            }else {
+                                    tempArrayList.clear()
+                                tempArrayList.addAll(itemList)
+                                gridView.adapter!!.notifyDataSetChanged()
+
+                            }
+                            // are filtering our adapter with
+                            // new text on below line.
+                          /*  itemAdapter.filter.filter(newText)*/
+                            Log.e("tag.1","found changed ::"+newText)
+                            return false
+                        }
+
+                        override fun onFocusChange(p0: View?, p1: Boolean) {
+                            Log.e("tag.1","found changed deeply::")
+                        }
+
+
+                    })
+                    ////////////////////////////////////////////////////////////search end
 
                     /*      for (ds in snapshot.children) {
                               val productId= ds.key.toString()
@@ -258,7 +351,17 @@ class HomeFragment : Fragment() {
         }*/
         //////////////////////////////////////////////////////////////////////////////////////////////////////working code end
 
-        gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ -> //onclicking the grid
+
+
+
+
+
+
+
+
+
+
+        /*gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ -> //onclicking the grid
             Toast.makeText(
                 requireActivity(), itemList[position].productName + " selected",
                 Toast.LENGTH_SHORT
@@ -268,7 +371,14 @@ class HomeFragment : Fragment() {
             intent.putExtra("item_id",itemList[position].productId)
             intent.putExtra("item_count",""+1)
             startActivity(intent)
-        }
+        }*/
+
+
+
+
+
+
+
 
 
        /* val menuListener = object : ValueEventListener {
@@ -307,67 +417,6 @@ class HomeFragment : Fragment() {
     }
     //firebase.....close
 
-
-
-
-
-
-
-
-
-
-
-    private fun initSearch() {
-        /*gridView = binding!!.gridView
-        itemList = ArrayList<ProductViewModal>()*/
-
-
-//        itemList = itemList + ProductViewModal("1","pid123",671531,"abcdd",20.0,100, "sid",R.drawable.img_curry_powder_cumin)
-       /* itemList = itemList + ProductViewModal("2", R.drawable.ic_user_profile)
-        itemList = itemList + ProductViewModal("3", R.drawable.ic_user_profile)
-        itemList = itemList + ProductViewModal("4", R.drawable.ic_user_profile)
-        itemList = itemList + ProductViewModal("5", R.drawable.ic_user_profile)*/
-
-        // on below line we are initializing our course adapter
-        // and passing course list and context.
-
-
-//        val itemAdapter = GridViewAdapterHome(itemList = itemList, requireActivity()) //initialising adapter
-//        gridView.adapter = itemAdapter  // on below line we are setting adapter to our grid view.
-
-
-       /* searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String): Boolean {
-                var i=0
-                while (i<itemAdapter.count){
-                    if (itemList.get(i).itemName.contains(query)) {
-                        itemAdapter.ge.filter(query)
-                    } else {
-                        Toast.makeText(requireActivity(), "No Match found", Toast.LENGTH_LONG)
-                            .show()
-                    }
-                }
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                //    adapter.getFilter().filter(newText);
-                return false
-            }
-        })*/
-
-      /*  gridView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            Toast.makeText(
-                requireActivity(), itemList[position].productName + " selected",
-                Toast.LENGTH_SHORT
-            ).show()
-
-            val intent = Intent (activity, ProductDescripActivity::class.java)
-            intent.putExtra("item_id",itemList[position].productName)
-            startActivity(intent)
-        }*/
-
-    }
 
 
     companion object {

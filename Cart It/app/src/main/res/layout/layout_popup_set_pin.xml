@@ -101,7 +101,7 @@
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/blue_accent_300"
         android:padding="16dp"
-        android:text="Set Current PinCode"
+        android:text="Set PinCode"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"
