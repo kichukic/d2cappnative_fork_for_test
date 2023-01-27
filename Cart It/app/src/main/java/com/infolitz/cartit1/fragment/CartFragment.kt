@@ -1,5 +1,6 @@
 package com.infolitz.cartit1.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.infolitz.cartit1.activity.OrderDetailsActivity
 import com.infolitz.cartit1.adapters.RecyclerViewAdapterCart
 import com.infolitz.cartit1.databinding.FragmentCartBinding
 import com.infolitz.cartit1.helper.ProductViewModal
@@ -45,6 +47,8 @@ class CartFragment : Fragment() {
         initializeDbRef()
         initAllProductID()
 
+        initclick()
+
 
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) { //back button
             override fun handleOnBackPressed() {
@@ -61,6 +65,17 @@ class CartFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
         return cartBinding?.root
     }
+
+    private fun initclick() {
+        cartBinding?.cartProDetailsOrderBtn?.setOnClickListener{
+//            addToCart()
+            var intent = Intent(requireActivity(), OrderDetailsActivity::class.java)
+//            intent.putExtra("passed_from","ProductDescripActivity")
+            startActivity(intent)
+        }
+    }
+
+
     private fun initSharedPref() {
         userSessionManager = UserSessionManager(requireActivity())
     }
