@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cart It Info</string>
+    <string name="verify_your_mobile_number">Verify Your Mobile Number</string>
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+    <string name="fetch_data">Fetch Data</string>
+</resources>
