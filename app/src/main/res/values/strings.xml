@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Sample cart App</string>
+    <string name="verify_your_mobile_number">Verify Your Mobile Number</string>
+    <string name="nav_open">open</string>
+    <string name="nav_close">close</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fetch_data">Fetch Data</string>
+</resources>

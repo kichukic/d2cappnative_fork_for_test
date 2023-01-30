@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <item
+            android:id="@+id/set_pin"
+            android:icon="@drawable/ic_pincode_pin_drop_24"
+            android:title="Set Pin"
+            android:actionLayout="@layout/actionbar_set_pin_layout"
+            app:showAsAction="always" />
+
+        <!--<item android:id="@+id/action_setting"
+            android:title="categories"
+            android:icon="@android:drawable/ic_menu_search"
+            app:showAsAction="always"
+            />-->
+</menu>
