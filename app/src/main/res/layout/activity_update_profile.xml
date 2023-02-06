@@ -63,14 +63,16 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Name"
                 android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="3dp"
+                android:hint="Name"
+                app:boxStrokeColor="@color/text_input_layout_stroke_color"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:placeholderText="Enter the Agent Name">
+                app:placeholderText="Enter the Agent Name"
+                app:placeholderTextColor="#3C3C3C">
 
                 <com.google.android.material.textfield.TextInputEditText
 
@@ -80,10 +82,10 @@
                     android:fontFamily="@font/nunito_medium"
                     android:gravity="center"
                     android:inputType="text"
-                    android:paddingTop="12dp"
+                    android:paddingTop="14dp"
                     android:paddingBottom="12dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -105,14 +107,16 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="3dp"
                 android:hint="Email"
+                app:boxStrokeColor="@color/text_input_layout_stroke_color"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:placeholderText="Enter the Agent Email">
+                app:placeholderText="Enter the Agent Email"
+                app:placeholderTextColor="#3C3C3C">
 
                 <com.google.android.material.textfield.TextInputEditText
 
@@ -122,10 +126,10 @@
                     android:fontFamily="@font/nunito_medium"
                     android:gravity="center"
                     android:inputType="textEmailAddress"
-                    android:paddingTop="12dp"
+                    android:paddingTop="14dp"
                     android:paddingBottom="12dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -133,14 +137,16 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginStart="3dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="3dp"
                 android:hint="Pincode"
+                app:boxStrokeColor="@color/text_input_layout_stroke_color"
                 app:expandedHintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:placeholderText="Enter the Work Area Pincode">
+                app:placeholderText="Enter the Work Area Pincode"
+                app:placeholderTextColor="#3C3C3C">
 
                 <com.google.android.material.textfield.TextInputEditText
 
@@ -154,9 +160,8 @@
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!--<EditText
@@ -197,7 +202,7 @@
                 android:gravity="center"
                 android:text="Update Profile"
                 android:textColor="@color/white"
-                android:textSize="14dp" />
+                android:textSize="16sp" />
 
 
         </LinearLayout>

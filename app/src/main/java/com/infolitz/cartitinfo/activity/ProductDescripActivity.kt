@@ -37,6 +37,10 @@ class ProductDescripActivity : AppCompatActivity() {
         productDescripBinding = ActivityProductDescripBinding.inflate(layoutInflater)
         setContentView(productDescripBinding.root)
 
+        if (supportActionBar != null) {
+            supportActionBar?.hide(); //to hide actionbar
+        }
+
         productId = intent.getStringExtra("item_id")!!
         quantityCount = intent.getStringExtra("item_count")!!.toInt()
         Log.e("the key is", productId)

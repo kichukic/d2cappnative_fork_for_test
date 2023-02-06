@@ -1,11 +1,14 @@
 package com.infolitz.cartitinfo.fragment
 
+import android.R
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,8 +20,8 @@ import com.infolitz.cartitinfo.adapters.RecyclerViewHomeAdapter
 import com.infolitz.cartitinfo.databinding.FragmentHomeBinding
 import com.infolitz.cartitinfo.helper.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
+import retrofit2.http.Field
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment() {
@@ -211,7 +214,7 @@ class HomeFragment : Fragment() {
                     binding!!.searchViewHome.isSubmitButtonEnabled = true //side button enabled in  search button
 
 
-
+                    binding!!.searchViewHome.setQueryHint(Html.fromHtml("<font color = #505050>" + getResources().getString(R.string.search_go) + "</font>"));
                    binding!!.searchViewHome.setOnQueryTextFocusChangeListener(object :SearchView.OnQueryTextListener,
                         View.OnFocusChangeListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {

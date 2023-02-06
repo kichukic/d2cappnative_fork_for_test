@@ -46,7 +46,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:backgroundTint="@color/blue_accent_300"
+        android:backgroundTint="@color/app_blue_variant"
         android:padding="16dp"
         android:text="ORDER NOW"
         android:textAllCaps="false"

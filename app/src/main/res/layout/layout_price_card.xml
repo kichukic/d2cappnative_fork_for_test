@@ -9,8 +9,9 @@
     android:clickable="false"
     android:focusable="true"
     app:cardElevation="0dp"
-    app:strokeColor="#CCCCCC"
+    app:strokeColor="@color/black"
     app:strokeWidth="1dp">
+    <!--app:strokeColor="#CCCCCC"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -102,7 +103,7 @@
             android:id="@+id/price_total_amount_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/blue_accent_300"
+            android:textColor="@color/app_blue_variant"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/price_total_label_tv"
             app:layout_constraintEnd_toEndOf="parent"

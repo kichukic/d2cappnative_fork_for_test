@@ -123,7 +123,9 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
 
             }
         }
-
+        holder.plusImageButton.contentDescription = "Add quantity of "+itemsViewModel.productName
+        holder.minusImageButton.contentDescription = "Reduce quantity of "+itemsViewModel.productName
+        holder.cartDeleteButton.contentDescription = "Delete "+itemsViewModel.productName+" from cart"
         holder.plusImageButton.setOnClickListener {
             count += 1
             holder.quantity.text = "$count"

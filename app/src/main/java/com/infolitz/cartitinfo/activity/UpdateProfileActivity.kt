@@ -28,6 +28,10 @@ class UpdateProfileActivity : AppCompatActivity() {
 
         agentMobile = intent.getStringExtra("mobile_number").toString()
 
+        if (supportActionBar != null) {
+            supportActionBar?.hide(); //to hide actionbar
+        }
+
         initNumber()
         initSharedPref()
         initializeDbRef()

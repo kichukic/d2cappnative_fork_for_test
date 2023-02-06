@@ -62,6 +62,10 @@ class OrderDetailsActivity : AppCompatActivity() {
         binding = ActivityOrderDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (supportActionBar != null) {
+            supportActionBar?.hide(); //to hide actionbar
+        }
+
         data = ArrayList<ProductViewModal>()
 
         //for db ordering list

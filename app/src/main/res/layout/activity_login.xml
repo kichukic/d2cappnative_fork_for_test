@@ -70,7 +70,7 @@
                     android:fontFamily="@font/nunito_bold"
                     android:gravity="center_horizontal"
                     android:text="@string/verify_your_mobile_number"
-                    android:textSize="14dp" />
+                    android:textSize="14sp" />
 
                 <LinearLayout
                     android:id="@+id/ll_tv_mobile_number"
@@ -105,15 +105,20 @@
                         android:layout_below="@+id/tv_verify_mobile"
                         android:layout_marginTop="16dp"
                         android:hint="Mobile Number"
+                        android:background="#FFFFFF"
                         app:expandedHintEnabled="false"
+                        app:boxStrokeColor="@color/text_input_layout_stroke_color"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:placeholderText="Enter the Mobile Number">
+                        app:placeholderText="Enter the Mobile Number"
+                        app:placeholderTextColor="#3C3C3C"
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/et_mobile_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:gravity="center"
                             android:inputType="phone"
                             android:maxLength="10"
@@ -133,7 +138,7 @@
                     android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <!-- <com.google.android.material.textfield.TextInputLayout
                          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -152,15 +157,6 @@
                         android:gravity="center"
                         android:textSize="12sp"
                         />-->
-                    <EditText
-                        android:id="@+id/et_otp1"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
-                        android:background="@drawable/bg_border_around"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:maxLength="1"
-                        android:textSize="20sp" />
                     <!--      </com.google.android.material.textfield.TextInputLayout>-->
 
 
@@ -200,15 +196,34 @@
                              </com.google.android.material.textfield.TextInputLayout>
              -->
                     <EditText
-                        android:id="@+id/et_otp2"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
-                        android:layout_marginStart="5dp"
+                        android:id="@+id/et_otp1"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
                         android:gravity="center"
+                        android:hint="0"
                         android:inputType="number"
                         android:maxLength="1"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
                         android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/et_otp2"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
+                        android:gravity="center"
+                        android:hint="1"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
+                        android:textSize="20sp"
+                        app:boxStrokeColor="@color/app_blue_variant" />
 
                     <!--   <com.google.android.material.textfield.TextInputLayout
                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -237,14 +252,19 @@
 
                     <EditText
                         android:id="@+id/et_otp3"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="5dp"
                         android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
                         android:gravity="center"
+                        android:hint="2"
                         android:inputType="number"
                         android:maxLength="1"
-                        android:textSize="20sp" />
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
+                        android:textSize="20sp"
+                        app:boxStrokeColor="@color/app_blue_variant" />
 
                     <!--  <com.google.android.material.textfield.TextInputLayout
                           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -273,13 +293,17 @@
 
                     <EditText
                         android:id="@+id/et_otp4"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="5dp"
                         android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
                         android:gravity="center"
+                        android:hint="3"
                         android:inputType="number"
                         android:maxLength="1"
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
                         android:textSize="20sp" />
 
                     <!-- <com.google.android.material.textfield.TextInputLayout
@@ -310,14 +334,19 @@
 
                     <EditText
                         android:id="@+id/et_otp5"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="5dp"
                         android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
                         android:gravity="center"
+                        android:hint="4"
                         android:inputType="number"
                         android:maxLength="1"
-                        android:textSize="20sp" />
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
+                        android:textSize="20sp"
+                        app:boxStrokeColor="@color/app_blue_variant" />
 
                     <!-- <com.google.android.material.textfield.TextInputLayout
                          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -346,15 +375,20 @@
 
                     <EditText
                         android:id="@+id/et_otp6"
-                        android:layout_width="36dp"
-                        android:layout_height="43dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginStart="5dp"
                         android:background="@drawable/bg_border_around"
+                        android:backgroundTint="@color/edit_text_layout_otp"
                         android:gravity="center"
+                        android:hint="5"
                         android:imeOptions="actionDone"
                         android:inputType="number"
                         android:maxLength="1"
-                        android:textSize="20sp" />
+                        android:singleLine="true"
+                        android:textCursorDrawable="@drawable/blue_cursor_color"
+                        android:textSize="20sp"
+                        app:boxStrokeColor="@color/app_blue_variant" />
                 </LinearLayout>
 
                 <RelativeLayout
@@ -391,8 +425,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_resend_otp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/app_blue_007EED"
-                    android:text="Send OTP" />
+                    android:backgroundTint="@color/app_blue_variant"
+                    android:text="Send OTP"
+                    android:textColor="#FFFFFF" />
 
                 <Button
                     android:id="@+id/bt_verify_otp"
@@ -400,8 +435,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_resend_otp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/app_blue_007EED"
+                    android:backgroundTint="@color/app_blue_variant"
                     android:text="Verify OTP"
+                    android:textColor="#FFFFFF"
                     android:visibility="gone" />
 
             </RelativeLayout>

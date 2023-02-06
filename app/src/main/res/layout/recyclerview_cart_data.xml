@@ -107,15 +107,16 @@
 
                             <ImageButton
                                 android:id="@+id/cart_product_minus_btn"
-                                android:layout_width="36dp"
-                                android:layout_height="30dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:layout_weight="1"
                                 android:background="@null"
+                                android:contentDescription="Reduce Quantity"
                                 app:srcCompat="@drawable/ic_remove_24" />
 
                             <TextView
                                 android:id="@+id/tv_cart_product_quantity_cart_re"
-                                android:layout_width="40dp"
+                                android:layout_width="48dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:background="@color/blue_shadow_color"
@@ -127,8 +128,8 @@
 
                             <ImageButton
                                 android:id="@+id/cart_product_plus_btn"
-                                android:layout_width="36dp"
-                                android:layout_height="30dp"
+                                android:layout_width="48dp"
+                                android:layout_height="48dp"
                                 android:layout_weight="1"
                                 android:background="@null"
                                 app:srcCompat="@drawable/ic_add_24" />
@@ -140,8 +141,8 @@
 
                     <ImageButton
                         android:id="@+id/image_button_cart_product_delete_btn_re"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/round_button"
                         android:scaleType="fitXY"
@@ -149,7 +150,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/cart_product_like_btn"
                         app:srcCompat="@drawable/ic_delete_24"
-                        app:tint="@color/gray" />
+                        app:tint="@color/dark_gray" />
                     </LinearLayout>
 
                 </LinearLayout>

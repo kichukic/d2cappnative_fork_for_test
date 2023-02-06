@@ -26,6 +26,9 @@ class EditAddressActivity : AppCompatActivity() {
 //        setContentView(R.layout.activity_edit_address)
         binding = ActivityEditAddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if (supportActionBar != null) {
+            supportActionBar?.hide(); //to hide actionbar
+        }
 
         initPrevCustNumber()
         initSharedPref()

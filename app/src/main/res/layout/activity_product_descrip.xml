@@ -20,7 +20,9 @@
                 android:id="@+id/pro_image_iv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_default_e_commerce" />
+                android:scaleType="centerInside"
+                android:adjustViewBounds="true"/>
+                <!--android:src="@drawable/ic_default_e_commerce"--> />
 
         </LinearLayout>
         <LinearLayout
@@ -95,30 +97,32 @@
 
                     <ImageButton
                         android:id="@+id/cart_product_minus_btn"
-                        android:layout_width="36dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
                         android:layout_weight="1"
                         android:background="@null"
+                        android:contentDescription="Reduce Quantity"
                         app:srcCompat="@drawable/ic_remove_24" />
 
                     <TextView
                         android:id="@+id/tv_cart_product_quantity_cart"
-                        android:layout_width="40dp"
+                        android:layout_width="48dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@color/blue_shadow_color"
                         android:gravity="center_horizontal|center_vertical"
                         android:textColor="@color/black"
                         android:textSize="14sp"
-                        android:text="2"
+                        android:text="3"
                         android:textStyle="bold"
                         tools:text="123" />
 
                     <ImageButton
                         android:id="@+id/cart_product_plus_btn"
-                        android:layout_width="36dp"
-                        android:layout_height="30dp"
+                        android:layout_width="48dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:contentDescription="Add Quantity"
                         android:background="@null"
                         app:srcCompat="@drawable/ic_add_24" />
 
@@ -207,7 +211,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/blue_accent_300"
+            android:backgroundTint="@color/app_blue_variant"
             android:padding="16dp"
             android:text="ADD TO CART"
             android:textAllCaps="false"
@@ -225,7 +229,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:backgroundTint="@color/blue_accent_300"
+            android:backgroundTint="@color/app_blue_variant"
             android:padding="16dp"
             android:text="ORDER NOW"
             android:textAllCaps="false"
