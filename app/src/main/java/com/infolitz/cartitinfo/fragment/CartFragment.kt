@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -91,6 +92,13 @@ class CartFragment : Fragment() {
                 val productIdList = ArrayList<String>()
                 val snapshot = task.result
                 Log.e("TAG","productid::"+snapshot.value)
+
+                if (snapshot.value.toString()=="null"){
+                    Toast.makeText(requireActivity(), "No Items in cart...", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+
                 for (ds in snapshot.children) {
                     Log.e("TAG","productid::"+ds.key.toString())
                     productIdList.add(ds.key.toString())
@@ -147,8 +155,14 @@ class CartFragment : Fragment() {
                         Log.e("TAG", "imgUrl ::" + imgUrl) //got imgUrl
                         val name = snapshot.child("name").getValue(String::class.java)
                         Log.e("TAG", "name ::" + name) //got name
-                        val price = snapshot.child("price").getValue(Double::class.java)
-                        Log.e("TAG", "price ::" + price) //got price
+
+                        val newPrice = snapshot.child("offerPrice").getValue(Double::class.java)
+                        Log.e("TAG","offerPrice ::"+newPrice) //got offerPrice
+
+                        val productOldPrice = snapshot.child("price").getValue(Double::class.java)
+                        Log.e("TAG","price ::"+productOldPrice) //got old price
+
+
                         val stockCount = snapshot.child("stockCount").getValue(Int::class.java)
                         Log.e("TAG", "stockCount ::" + stockCount) //got stockCount
                         val storeId = snapshot.child("storeId").getValue(String::class.java)
@@ -162,10 +176,11 @@ class CartFragment : Fragment() {
                                 name!!,
                                 productId,
                                 description!!,
-                                price!!,
+                                newPrice!!,
                                 stockCount!!,
                                 storeId!!,
-                                imgUrl!!
+                                imgUrl!!,
+                                productOldPrice!!
                             )
                         )
 //                    itemList = itemList + ProductViewModal(name!!,productId,availPin!!,description!!,price!!,stockCount!!, storeId!!,R.drawable.img_curry_powder_cumin)

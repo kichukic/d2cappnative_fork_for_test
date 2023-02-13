@@ -37,9 +37,9 @@ class ProductDescripActivity : AppCompatActivity() {
         productDescripBinding = ActivityProductDescripBinding.inflate(layoutInflater)
         setContentView(productDescripBinding.root)
 
-        if (supportActionBar != null) {
+        /*if (supportActionBar != null) {
             supportActionBar?.hide(); //to hide actionbar
-        }
+        }*/
 
         productId = intent.getStringExtra("item_id")!!
         quantityCount = intent.getStringExtra("item_count")!!.toInt()
@@ -125,8 +125,13 @@ class ProductDescripActivity : AppCompatActivity() {
                         Log.e("TAG", "imgUrl ::" + imgUrl) //got imgUrl
                         val name = ds.child("name").getValue(String::class.java)
                         Log.e("TAG", "name ::" + name) //got name
-                        val price = ds.child("price").getValue(Double::class.java)
-                        Log.e("TAG", "price ::" + price) //got price
+
+                        val newPrice = ds.child("offerPrice").getValue(Double::class.java)
+                        Log.e("TAG","offerPrice ::"+newPrice) //got offerPrice
+
+                        val productOldPrice = ds.child("price").getValue(Double::class.java)
+                        Log.e("TAG","price ::"+productOldPrice) //got old price
+
                         val stockCount = ds.child("stockCount").getValue(Int::class.java)
                         Log.e("TAG", "stockCount ::" + stockCount) //got stockCount
                         val storeId = ds.child("storeId").getValue(String::class.java)
@@ -134,7 +139,7 @@ class ProductDescripActivity : AppCompatActivity() {
 
                         productDescripBinding.proDetailsTitleTv.text= name //setting product name
                         supportActionBar!!.title = name // setting the tittle
-                        productDescripBinding.proDetailsPriceTv.text= "₹$price" //setting price
+                        productDescripBinding.proDetailsPriceTv.text= "₹$newPrice" //setting price
 
                         productDescripBinding.proDetailsSpecificationsLabel.text=description
 

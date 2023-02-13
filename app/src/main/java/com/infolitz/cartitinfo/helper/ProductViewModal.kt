@@ -7,5 +7,6 @@ data class ProductViewModal(
     val price: Double,
     val stockCount: Int,
     val storeId: String,
-    val proImgUrl: String
+    val proImgUrl: String,
+    val productOldPrice: Double
 )

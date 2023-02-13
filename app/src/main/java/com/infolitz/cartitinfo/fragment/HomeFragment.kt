@@ -38,6 +38,9 @@ class HomeFragment : Fragment() {
 
     lateinit var userSessionManager: UserSessionManager
 
+    lateinit var  mLayoutManager: RecyclerView.LayoutManager
+    lateinit var adapter1: RecyclerViewHomeAdapter
+
     lateinit var textViewOldPrice: TextView
     lateinit var textViewNewPrice: TextView
     lateinit var searchView: SearchView
@@ -58,6 +61,8 @@ class HomeFragment : Fragment() {
         initializeDbRef()
 
         setPinCode()
+
+        searchData()
 
 
 //        initViewWithDBdata()
@@ -89,6 +94,10 @@ class HomeFragment : Fragment() {
                 val storeIdList = ArrayList<String>()
                 val snapshot = task.result
                 Log.e("TAG","storeid::"+snapshot.value) //storeid::{s1=sIdsId1673406243}
+                if (snapshot.value.toString()=="null"){
+                    Toast.makeText(requireActivity(), "No Stores Available..Change Pincode", Toast.LENGTH_LONG)
+                        .show()
+                }
                 for (ds in snapshot.children) {
                     Log.e("TAG","store_id::"+ds.value.toString())
                     storeIdList.add(ds.value.toString())
@@ -141,10 +150,71 @@ class HomeFragment : Fragment() {
     //firebase.....
     private fun initializeDbRef() {
         databaseReference = Firebase.database.reference
+
+
+        //for RecyclerView
+        gridView = binding!!.gridView
+        mLayoutManager = GridLayoutManager(context, 2)
+        gridView.layoutManager = mLayoutManager
     }
 
+    ////////////////////////////////////////////////search
+    private fun searchData(){
+
+
+        // below line is to call set on query text listener method.
+        binding!!.searchViewHome.setOnQueryTextListener(object :SearchView.OnQueryTextListener,
+            View.OnFocusChangeListener {
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(msg: String): Boolean {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                filter(msg)
+                return false
+            }
+
+            override fun onFocusChange(p0: View?, p1: Boolean) {
+
+                Log.e("tag.2","found changed deeply::")
+            }
+        })
+
+    }
+
+    private fun filter(text: String) {
+        // creating a new array list to filter our data.
+        val filteredlist: ArrayList<ProductViewModal> = ArrayList()
+
+        // running a for loop to compare elements.
+        for (item in itemList) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.productName.toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item)
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(requireActivity(), "No Data Found..", Toast.LENGTH_SHORT).show()
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+//            val adapter1 = RecyclerViewHomeAdapter(requireActivity(), itemList/*,quantity*/)
+//            gridView.adapter =adapter1
+
+            adapter1.filterList(filteredlist)
+        }
+    }
+
+    ////////////////////////////////////////////////search
+
     private fun initViewWithDBdata(productIdInStoreList:ArrayList<String>) {
-        gridView = binding!!.gridView
+//        gridView = binding!!.gridView //
 //        itemList = ArrayList<ProductViewModal>()
         itemList = arrayListOf<ProductViewModal>()
 
@@ -176,8 +246,13 @@ class HomeFragment : Fragment() {
                     val name = snapshot.child("name").getValue(String::class.java)
                     Log.e("TAG","name ::"+name) //got name
                     itemNameList.add(name!!)
-                    val price = snapshot.child("price").getValue(Double::class.java)
-                    Log.e("TAG","price ::"+price) //got price
+
+                    val newPrice = snapshot.child("offerPrice").getValue(Double::class.java)
+                    Log.e("TAG","offerPrice ::"+newPrice) //got offerPrice
+
+                    val productOldPrice = snapshot.child("price").getValue(Double::class.java)
+                    Log.e("TAG","price ::"+productOldPrice) //got old price
+
                     val stockCount = snapshot.child("stockCount").getValue(Int::class.java)
                     Log.e("TAG","stockCount ::"+stockCount) //got stockCount
                     val storeId = snapshot.child("storeId").getValue(String::class.java)
@@ -185,22 +260,15 @@ class HomeFragment : Fragment() {
 
 
 
-
-
-
-
-
-
-
-                    itemList = itemList + ProductViewModal(name!!,productId,description!!,price!!,stockCount!!, storeId!!,imgUrl!!)
+                    itemList = itemList + ProductViewModal(name!!,productId,description!!,newPrice!!,stockCount!!, storeId!!,imgUrl!!,productOldPrice!!)
 
 
                     tempArrayList.addAll(itemList)
 
                     //new adding
-                    val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2)
-                    gridView.layoutManager = mLayoutManager
-                    val adapter1 = RecyclerViewHomeAdapter(requireActivity(), itemList/*,quantity*/)
+                   /* val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2)
+                    gridView.layoutManager = mLayoutManager*/
+                    adapter1 = RecyclerViewHomeAdapter(requireActivity(), itemList/*,quantity*/)
                     gridView.adapter =adapter1   // Setting the Adapter with the recyclerview
                     // new adding end
 
@@ -215,6 +283,8 @@ class HomeFragment : Fragment() {
 
 
                     binding!!.searchViewHome.setQueryHint(Html.fromHtml("<font color = #505050>" + getResources().getString(R.string.search_go) + "</font>"));
+
+
                    binding!!.searchViewHome.setOnQueryTextFocusChangeListener(object :SearchView.OnQueryTextListener,
                         View.OnFocusChangeListener {
                         override fun onQueryTextSubmit(query: String?): Boolean {

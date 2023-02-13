@@ -313,8 +313,12 @@ class OrderDetailsActivity : AppCompatActivity() {
                     Log.e("TAG", "imgUrl ::" + imgUrl) //got imgUrl
                     val name = snapshot.child("name").getValue(String::class.java)
                     Log.e("TAG", "name ::" + name) //got name
-                    val price = snapshot.child("price").getValue(Double::class.java)
-                    Log.e("TAG", "price ::" + price) //got price
+                    val olDprice = snapshot.child("price").getValue(Double::class.java)
+                    Log.e("TAG", "price ::" + olDprice) //got old price
+
+                    val price = snapshot.child("offerPrice").getValue(Double::class.java)
+                    Log.e("TAG", "price ::" + price) //got new price
+
                     val stockCount = snapshot.child("stockCount").getValue(Int::class.java)
                     Log.e("TAG", "stockCount ::" + stockCount) //got stockCount
                     val storeId = snapshot.child("storeId").getValue(String::class.java)
@@ -325,10 +329,11 @@ class OrderDetailsActivity : AppCompatActivity() {
                             name!!,
                             productId,
                             description!!,
-                            price!!,
+                            price!!,//new price
                             stockCount!!,
                             storeId!!,
-                            imgUrl!!
+                            imgUrl!!,
+                            olDprice!!
                         )
                     )
 

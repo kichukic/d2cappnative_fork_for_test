@@ -24,6 +24,7 @@ import com.infolitz.cartitinfo.fragment.CartFragment
 import com.infolitz.cartitinfo.helper.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 import com.infolitz.cartitinfo.helper.getGlideProgress
+import kotlin.math.roundToInt
 
 class RecyclerViewAdapterCart(val context: Context, private var mList: List<ProductViewModal>) :
         RecyclerView.Adapter<RecyclerViewAdapterCart.ViewHolder>() {
@@ -91,8 +92,9 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
         productIdList.add(itemsViewModel.productId.toString()) //quantity taken to array list
         storeIdList.add(itemsViewModel.storeId.toString()) //quantity taken to array list
 
-        holder.productPrice.text = "${itemsViewModel.price}"
+        holder.productNewPrice.text = "${itemsViewModel.price}"
 
+        holder.priceOfferPercentage.text = "${getOfferPercentage(itemsViewModel.price,itemsViewModel.productOldPrice)}"+"% Off"
 
         //for quantity count
         val lngRef =
@@ -208,7 +210,8 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {
         val imageView: ImageView = itemView.findViewById(R.id.img_view_cart_re)
         val productName: TextView = itemView.findViewById(R.id.tv_product_name_cart_re)
-        val productPrice: TextView = itemView.findViewById(R.id.tv_price_old_cart_re)
+        val productNewPrice: TextView = itemView.findViewById(R.id.tv_price_old_cart_re)
+        val priceOfferPercentage: TextView = itemView.findViewById(R.id.tv_offer_cart_re)
         val quantity: TextView = itemView.findViewById(R.id.tv_cart_product_quantity_cart_re)
         val plusImageButton: ImageButton = itemView.findViewById(R.id.cart_product_plus_btn)
         val minusImageButton: ImageButton = itemView.findViewById(R.id.cart_product_minus_btn)
@@ -222,5 +225,12 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
         notifyDataSetChanged()
         // where this.data is the recyclerView's dataset you are
         // setting in adapter=new Adapter(this,db.getData());
+    }
+    private fun getOfferPercentage(price: Double, productOldPrice: Double):Int {
+        var percentOffer=0
+
+        percentOffer= 100 - Integer.valueOf(((price/productOldPrice)*100).roundToInt())
+
+        return percentOffer
     }
 }

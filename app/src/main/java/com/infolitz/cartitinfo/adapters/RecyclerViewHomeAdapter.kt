@@ -15,8 +15,9 @@ import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.activity.ProductDescripActivity
 import com.infolitz.cartitinfo.helper.ProductViewModal
 import com.infolitz.cartitinfo.helper.getGlideProgress
+import kotlin.math.roundToInt
 
-class RecyclerViewHomeAdapter(val context: Context, private val mList: List<ProductViewModal>) : RecyclerView.Adapter<RecyclerViewHomeAdapter.ViewHolder>() {
+class RecyclerViewHomeAdapter(val context: Context, private var mList: List<ProductViewModal>) : RecyclerView.Adapter<RecyclerViewHomeAdapter.ViewHolder>() {
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,6 +28,16 @@ class RecyclerViewHomeAdapter(val context: Context, private val mList: List<Prod
 
         return ViewHolder(view)
     }
+//for search
+    fun filterList(filterlist: ArrayList<ProductViewModal>) {
+        // below line is to add our filtered
+        // list in our course array list.
+        mList = filterlist
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged()
+    }
+    //... for search end
 
     // binds the list items to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -50,7 +61,11 @@ class RecyclerViewHomeAdapter(val context: Context, private val mList: List<Prod
 
 
 
-        holder.productPrice.text = "${itemsViewModel.price}"
+        holder.productNewPrice.text = "${itemsViewModel.price}"
+
+        holder.priceOfferPercentage.text = "${getOfferPercentage(itemsViewModel.price,itemsViewModel.productOldPrice)}"+"% Off"
+
+        holder.productOldPrice.text = "${itemsViewModel.productOldPrice}"
 
 
 
@@ -65,6 +80,14 @@ class RecyclerViewHomeAdapter(val context: Context, private val mList: List<Prod
 
     }
 
+    private fun getOfferPercentage(price: Double, productOldPrice: Double):Int {
+        var percentOffer=0
+
+        percentOffer= 100 - Integer.valueOf(((price/productOldPrice)*100).roundToInt())
+
+        return percentOffer
+    }
+
     // return the number of the items in the list
     override fun getItemCount(): Int {
         return mList.size
@@ -77,7 +100,9 @@ class RecyclerViewHomeAdapter(val context: Context, private val mList: List<Prod
         val itemImageView: ImageView = itemView.findViewById(R.id.imageView_grid)
 
         val productName: TextView = itemView.findViewById(R.id.tv_item_name_grid)
-        val productPrice: TextView = itemView.findViewById(R.id.tv_item_price_new_grid)
+        val productNewPrice: TextView = itemView.findViewById(R.id.tv_item_price_new_grid)
+        val productOldPrice: TextView = itemView.findViewById(R.id.tv_item_price_grid)
+        val priceOfferPercentage: TextView = itemView.findViewById(R.id.tv_item_offer_price_grid)
         val cardButton: CardView = itemView.findViewById(R.id.card_home)
 
 
