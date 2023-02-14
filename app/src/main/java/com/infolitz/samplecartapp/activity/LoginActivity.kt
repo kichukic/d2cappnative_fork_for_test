@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.*
@@ -169,14 +170,16 @@ class LoginActivity : AppCompatActivity() {
     private fun observeResponse(userEmail: String?, userPassword: String?) {
         viewModel.dataList.observe(this) {
             Log.e("RESPONSE", "DATA : $it")
-            if (it.token != "") {
-                Log.e("TOKEN::",it.token.toString())
-                userSessionManager.setAgentToken(it.token.toString())
+            if(it != null) {
+                if (it.token != "") {
+                    Log.e("TOKEN::", it.token.toString())
+                    userSessionManager.setAgentToken(it.token.toString())
 //                UserSessionManager(this).setToken(it.data?.token)
 //                UserSessionManager(this).setUserId(it.data?.Id)
 //                gotoProfile(userEmail, userPassword)
-            } else {
-               /* MyDialogSheet(this).apply {
+                    gotoHomeMain()
+                } else {
+                    /* MyDialogSheet(this).apply {
                     setTitle(getString(R.string.oops))
                     setMessage(it.message)
                     setPositiveButton(getString(R.string.retry)) {
@@ -184,7 +187,11 @@ class LoginActivity : AppCompatActivity() {
                     }
                     setNegativeButton(getString(R.string.cancel), null)
                 }.show()*/
-                Log.e("response","no Token")
+                    Log.e("response", "no Token")
+                }
+            }else{
+                Toast.makeText(this, "Enter a valid Email or Password", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         viewModel.errorMessage.observe(this) {
@@ -206,6 +213,11 @@ class LoginActivity : AppCompatActivity() {
             )
         )
         viewModel.getProfile(profileReq)
+    }
+
+    private fun gotoHomeMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

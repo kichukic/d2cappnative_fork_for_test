@@ -8,7 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-<!--    app color combos-->
+    <!--    app color combos-->
     <color name="app_blue_007EED">#007EED</color>
     <color name="app_blue_variant">#044fab</color>
     <color name="app_blue_004">#004c8e</color>
@@ -23,4 +23,5 @@
     <color name="red">#FF0000</color>
     <color name="green">#4BB543</color>
     <color name="loader_background_color">#55AAAAAA</color>
+    <color name="loader_background_color2">#5438596C</color>
 </resources>

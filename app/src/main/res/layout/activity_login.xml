@@ -180,6 +180,11 @@
                             android:checked="false"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/login_error_text_view"
+
+
+
+                            app:trackTint="@color/switch_track_selector"
+                            app:thumbTint="@color/switch_thumb_selector"
                              />
 
 
@@ -260,8 +265,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_resend_otp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/app_blue_007EED"
-                    android:text="Login" />
+                    android:backgroundTint="@color/app_blue_variant"
+                    android:text="Login"
+                    android:textColor="#FFFFFF"/>
 
                 <Button
                     android:id="@+id/bt_verify_otp"
@@ -269,8 +275,9 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/rl_resend_otp"
                     android:layout_marginTop="30dp"
-                    android:backgroundTint="@color/app_blue_007EED"
+                    android:backgroundTint="@color/app_blue_variant"
                     android:text="Verify OTP"
+                    android:textColor="#FFFFFF"
                     android:visibility="gone" />
 
             </RelativeLayout>

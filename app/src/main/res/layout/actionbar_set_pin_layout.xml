@@ -3,14 +3,16 @@
     android:layout_width="wrap_content"
     android:id="@+id/relativeLayout_setPin_actionBar"
     android:layout_height="fill_parent"
+    android:clickable="true"
     android:orientation="horizontal"
     android:layout_gravity="right" >
 
     <!-- Menu Item Image -->
     <ImageView
         android:id="@+id/img_view_nav_set_pin"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:contentDescription="Change PinCode"
         android:clickable="true"
         android:layout_gravity="center"
         android:src="@drawable/ic_pincode_pin_drop_24" />
@@ -24,8 +26,8 @@
         android:layout_alignParentRight="true"
         android:fontFamily="@font/nunito_light"
         android:layout_marginEnd="5dp"
-        android:textSize="16dp"
-        android:background="@color/app_blue_007EED"
+        android:textSize="16sp"
+        android:background="@color/app_blue_variant"
         android:text="Set Your Pin"
         android:textColor="@color/white" />
 

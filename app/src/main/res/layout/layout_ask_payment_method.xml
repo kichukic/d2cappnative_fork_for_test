@@ -9,8 +9,9 @@
     android:clickable="false"
     android:focusable="true"
     app:cardElevation="0dp"
-    app:strokeColor="#CCCCCC"
+    app:strokeColor="@color/black"
     app:strokeWidth="1dp">
+    <!--    app:strokeColor="#CCCCCC"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,6 +37,7 @@
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:buttonTint="@color/app_blue_variant"
                 android:text="Pay by UPI"/>
 
             <RadioButton
@@ -44,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textStyle="bold"
+                android:buttonTint="@color/app_blue_variant"
                 android:text="Cash On Delivery"/>
 
         </RadioGroup>

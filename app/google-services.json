@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "97046947737",
-    "project_id": "cart-it-8ddb6",
-    "storage_bucket": "cart-it-8ddb6.appspot.com"
+    "project_number": "567939881624",
+    "firebase_url": "https://cart-it-87297-default-rtdb.firebaseio.com",
+    "project_id": "cart-it-87297",
+    "storage_bucket": "cart-it-87297.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97046947737:android:4cd97d9d7f1288e1d29508",
+        "mobilesdk_app_id": "1:567939881624:android:55a546d51440581d718eed",
         "android_client_info": {
           "package_name": "com.infolitz.samplecartapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "97046947737-6sjor4ggd459sb1m62cbj7k6mkplrioh.apps.googleusercontent.com",
+          "client_id": "567939881624-g6bi1vh2l570gft8m6gvrjcgrs3m39t0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAiTBCRT9707G4YFhHbhcD1C8ag2TnHMh4"
+          "current_key": "AIzaSyC_woDiPCkl6TSGTeakMbQyCVv6FbFHHvk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "97046947737-6sjor4ggd459sb1m62cbj7k6mkplrioh.apps.googleusercontent.com",
+              "client_id": "567939881624-g6bi1vh2l570gft8m6gvrjcgrs3m39t0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,35 +37,35 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:97046947737:android:6c4d010af09d0bd7d29508",
+        "mobilesdk_app_id": "1:567939881624:android:0438e4b39e518e9d718eed",
         "android_client_info": {
-          "package_name": "com.infolitz.samplecartapp"
+          "package_name": "com.infolitz.cartitinfo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "97046947737-jf9o8aeg4l4s9kmsce2j81e7222q13g2.apps.googleusercontent.com",
+          "client_id": "567939881624-8ceni42pauege1av105i38gsa139bkch.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.infolitz.samplecartapp",
+            "package_name": "com.infolitz.cartitinfo",
             "certificate_hash": "5a278ecaac74aeabeb67a2c5da30a8f4e7375db0"
           }
         },
         {
-          "client_id": "97046947737-6sjor4ggd459sb1m62cbj7k6mkplrioh.apps.googleusercontent.com",
+          "client_id": "567939881624-g6bi1vh2l570gft8m6gvrjcgrs3m39t0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAiTBCRT9707G4YFhHbhcD1C8ag2TnHMh4"
+          "current_key": "AIzaSyC_woDiPCkl6TSGTeakMbQyCVv6FbFHHvk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "97046947737-6sjor4ggd459sb1m62cbj7k6mkplrioh.apps.googleusercontent.com",
+              "client_id": "567939881624-g6bi1vh2l570gft8m6gvrjcgrs3m39t0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

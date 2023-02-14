@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:background="@color/loader_background_color"
+    android:background="@color/loader_background_color2"
     android:translationZ="2dp">
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        app:indicatorColor="@color/blue_accent_300"
+        app:indicatorColor="@color/app_blue_variant"
         app:indicatorDirectionCircular="clockwise"
         app:trackColor="@color/white"
         app:trackThickness="6dp" />

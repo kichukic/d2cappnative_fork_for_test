@@ -17,16 +17,16 @@
 
     </group>
 
-        <item android:title="Profile">
-            <menu>
-                <group>
+    <item android:title="Profile">
+        <menu>
+            <group>
                 <item
                     android:id="@+id/nav_logout"
                     android:icon="@drawable/ic_nav_log_out"
                     android:title="LogOut" />
-                </group>
-            </menu>
-        </item>
+            </group>
+        </menu>
+    </item>
 
 
 </menu>

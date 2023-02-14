@@ -19,7 +19,7 @@
         android:paddingTop="8dp"
         android:text="Np"
         android:textColor="@color/black"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <TextView
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="np@gmail.com"
-        android:textSize="16dp" />
+        android:textSize="16sp" />
 
     <View
         android:layout_width="match_parent"

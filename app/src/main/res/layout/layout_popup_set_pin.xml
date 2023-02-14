@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_pincode_pin_drop_24"
-        app:tint="@color/blue_accent_300" />
+        app:tint="@color/app_blue_variant" />
 
     <TextView
         android:id="@+id/enter_pin_label_tv"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/nunito_regular"
         android:text="Current Pin : "
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
@@ -55,9 +55,11 @@
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         app:expandedHintEnabled="false"
+        app:boxStrokeColor="@color/text_input_layout_stroke_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guideline2"
+        app:placeholderTextColor="#3C3C3C"
         app:placeholderText="Enter the Pin Code">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -65,6 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+
+            android:textCursorDrawable="@drawable/blue_cursor_color"
             android:inputType="phone"
             android:maxLength="6"
             android:paddingTop="12dp"
@@ -72,25 +76,25 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-   <!-- <TextView
-        android:id="@+id/order_success_message_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="thank you for shopping"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pinOutlinedTextField" />-->
+    <!-- <TextView
+         android:id="@+id/order_success_message_tv"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="8dp"
+         android:text="thank you for shopping"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@id/pinOutlinedTextField" />-->
 
-   <!-- <TextView
-        android:id="@+id/redirect_home_timer_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinOutlinedTextField"
-        tools:text="Redirecting to home in 5" />-->
+    <!-- <TextView
+         android:id="@+id/redirect_home_timer_tv"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="16dp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/pinOutlinedTextField"
+         tools:text="Redirecting to home in 5" />-->
 
     <Button
         android:id="@+id/set_current_pincode_btn"
@@ -99,7 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/blue_accent_300"
+        android:backgroundTint="@color/app_blue_variant"
         android:padding="16dp"
         android:text="Set PinCode"
         android:textAllCaps="false"

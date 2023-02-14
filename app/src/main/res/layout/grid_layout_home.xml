@@ -25,7 +25,7 @@
             android:scaleType="centerInside"
             android:adjustViewBounds="true"
             android:src="@drawable/img_curry_powder_cumin"
-          />
+            />
         <!--  tools:srcCompat="@tools:sample/avatars" -->
 
         <TextView
