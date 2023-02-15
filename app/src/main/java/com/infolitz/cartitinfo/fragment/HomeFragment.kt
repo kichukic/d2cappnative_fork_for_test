@@ -1,6 +1,8 @@
 package com.infolitz.cartitinfo.fragment
 
 import android.R
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -10,14 +12,18 @@ import android.view.ViewGroup
 import android.widget.*
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.infolitz.cartitinfo.activity.MainActivity
+import com.infolitz.cartitinfo.activity.OrderDetailsActivity
 import com.infolitz.cartitinfo.adapters.RecyclerViewHomeAdapter
 import com.infolitz.cartitinfo.databinding.FragmentHomeBinding
+import com.infolitz.cartitinfo.helper.ProductModelHomeFragment
 import com.infolitz.cartitinfo.helper.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 import retrofit2.http.Field
@@ -30,9 +36,9 @@ class HomeFragment : Fragment() {
 
     lateinit var gridView: RecyclerView
 //    lateinit var gridView: GridView
-    lateinit var itemList: List<ProductViewModal>
+    lateinit var itemList: List<ProductModelHomeFragment>
 
-    lateinit var tempArrayList: ArrayList<ProductViewModal> /// for searching purpose
+    lateinit var tempArrayList: ArrayList<ProductModelHomeFragment> /// for searching purpose
 
     lateinit var itemNameList: ArrayList<String>
 
@@ -65,6 +71,10 @@ class HomeFragment : Fragment() {
         searchData()
 
 
+        initClicks()
+        showAddToCartButton(false)//add to cart button hidden
+
+
 //        initViewWithDBdata()
 
 
@@ -81,6 +91,31 @@ class HomeFragment : Fragment() {
 
         // Inflate the layout for this fragment
         return binding?.root
+    }
+
+    private fun initClicks() {
+        binding?.homeProDetailsAddCartBtn?.setOnClickListener{ //on clicking add to cart item
+            addToCart()
+
+        }
+    }
+
+    private fun addToCart() {
+        val alertDialog =AlertDialog.Builder(requireActivity())
+        alertDialog.setTitle("Add to cart")
+        alertDialog.setMessage("Do you want to cart the items?")
+        alertDialog.setPositiveButton("Yes"){_,_ ->
+            Toast.makeText(requireActivity(),"Added to Cart Successfully",Toast.LENGTH_SHORT).show()
+            adapter1.clearTheSelected()
+//            addDataToCartDB()
+            showAddToCartButton(false)
+            var intent = Intent(requireActivity(), MainActivity::class.java)
+            startActivity(intent)
+        }
+        alertDialog.setNegativeButton("No"){
+            _,_ ->
+        }
+        alertDialog.show()
     }
 
     private fun setPinCode() {
@@ -186,7 +221,7 @@ class HomeFragment : Fragment() {
 
     private fun filter(text: String) {
         // creating a new array list to filter our data.
-        val filteredlist: ArrayList<ProductViewModal> = ArrayList()
+        val filteredlist: ArrayList<ProductModelHomeFragment> = ArrayList()
 
         // running a for loop to compare elements.
         for (item in itemList) {
@@ -216,9 +251,9 @@ class HomeFragment : Fragment() {
     private fun initViewWithDBdata(productIdInStoreList:ArrayList<String>) {
 //        gridView = binding!!.gridView //
 //        itemList = ArrayList<ProductViewModal>()
-        itemList = arrayListOf<ProductViewModal>()
+        itemList = arrayListOf<ProductModelHomeFragment>()
 
-        tempArrayList = arrayListOf<ProductViewModal>()
+        tempArrayList = arrayListOf<ProductModelHomeFragment>()
 
         itemNameList =ArrayList<String>()
 
@@ -260,7 +295,7 @@ class HomeFragment : Fragment() {
 
 
 
-                    itemList = itemList + ProductViewModal(name!!,productId,description!!,newPrice!!,stockCount!!, storeId!!,imgUrl!!,productOldPrice!!)
+                    itemList = itemList + ProductModelHomeFragment(name!!,productId,description!!,newPrice!!,stockCount!!, storeId!!,imgUrl!!,productOldPrice!!,false)
 
 
                     tempArrayList.addAll(itemList)
@@ -268,7 +303,7 @@ class HomeFragment : Fragment() {
                     //new adding
                    /* val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2)
                     gridView.layoutManager = mLayoutManager*/
-                    adapter1 = RecyclerViewHomeAdapter(requireActivity(), itemList/*,quantity*/)
+                    adapter1 = RecyclerViewHomeAdapter(requireActivity(),{show-> showAddToCartButton(show)},itemList/*,quantity*/)
                     gridView.adapter =adapter1   // Setting the Adapter with the recyclerview
                     // new adding end
 
@@ -503,5 +538,9 @@ class HomeFragment : Fragment() {
     }
     private fun initSharedPref() {
         userSessionManager = UserSessionManager(requireActivity())
+    }
+
+    fun showAddToCartButton(show:Boolean){
+        binding?.homeProDetailsAddCartBtn?.isVisible=show //when show =true; item showed
     }
 }

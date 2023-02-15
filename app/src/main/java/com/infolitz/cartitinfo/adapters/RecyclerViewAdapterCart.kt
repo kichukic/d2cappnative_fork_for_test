@@ -26,7 +26,7 @@ import com.infolitz.cartitinfo.helper.UserSessionManager
 import com.infolitz.cartitinfo.helper.getGlideProgress
 import kotlin.math.roundToInt
 
-class RecyclerViewAdapterCart(val context: Context, private var mList: List<ProductViewModal>) :
+class RecyclerViewAdapterCart(val context: Context, private var mList: ArrayList<ProductViewModal>) :
         RecyclerView.Adapter<RecyclerViewAdapterCart.ViewHolder>() {
 
     lateinit var userSessionManager: UserSessionManager
@@ -172,6 +172,8 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
             databaseReference.child("Agents").child(userSessionManager.getAgentUId())
                 .child("cart")
                 .child(itemsViewModel.productId).removeValue()
+            mList.removeAt(position)
+            this.notifyDataSetChanged()
 
             /*this.mList
 
@@ -180,11 +182,11 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
             notifyItemRangeChanged(position, itemCount)
             setData(this)*/
 
-            if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
+            /*if (context is OrderDetailsActivity) { //made to call the function in OrderDetailsActivity
                 (context as OrderDetailsActivity).initAllProductID()
                 Log.e("OrderDetails activity","cleared success")
             }else
-            /*if (context is CartFragment)*/ {
+            *//*if (context is CartFragment)*//* {
                 Log.e("CartFragment activity","cleared success")
                 mList.drop(position)
                 notifyItemRemoved(position)
@@ -192,7 +194,7 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
 //                notifyItemChanged(position)
                 this.notifyDataSetChanged()
             }
-
+*/
         }
 
 
@@ -219,7 +221,7 @@ class RecyclerViewAdapterCart(val context: Context, private var mList: List<Prod
         val cartDeleteButton: ImageButton = itemView.findViewById(R.id.image_button_cart_product_delete_btn_re)
     }
 
-    fun setData(data: List<ProductViewModal>) {
+    fun setData(data: ArrayList<ProductViewModal>) {
 
         mList = data
         notifyDataSetChanged()

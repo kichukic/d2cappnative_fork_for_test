@@ -11,6 +11,25 @@
     app:cardUseCompatPadding="true"
     app:contentPadding="1dp"
     >
+    <FrameLayout
+        android:id="@+id/frame_layout_click_multi_select"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/loader_background_color2"
+        android:translationZ="2dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/success_image_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_filled_check_circle_24"
+            app:tint="@color/app_blue_variant" />
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

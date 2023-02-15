@@ -10,11 +10,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.RadioButton
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DatabaseReference
@@ -22,11 +20,9 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.adapters.RecyclerViewAdapterCart
-import com.infolitz.cartitinfo.adapters.RecyclerViewHomeAdapter
 import com.infolitz.cartitinfo.databinding.ActivityOrderDetailsBinding
 import com.infolitz.cartitinfo.helper.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
-import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.roundToInt
