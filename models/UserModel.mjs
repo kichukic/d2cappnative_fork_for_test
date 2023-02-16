@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 
 const findUser =()=>{
-    return User.findOne({email})
+    return User.find()
 }
 
  const CreateUser = (user)=>{
