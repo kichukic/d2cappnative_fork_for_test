@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 
-const database = mongoose.connect("mongodb://localhost:27017/IOT",{
+const database = mongoose.connect("mongodb://localhost:27017/newdb",{
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(()=>{
@@ -10,4 +10,4 @@ const database = mongoose.connect("mongodb://localhost:27017/IOT",{
     console.log("error: " + errnode)
 })
 
-export {database as db}
+export {database as default}
