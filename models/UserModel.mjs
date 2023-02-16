@@ -27,12 +27,20 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-const findUser =()=>{
-    return User.find()
+const findUser =(email)=>{
+    return User.findOne({email})
 }
 
  const CreateUser = (user)=>{
     return User.create(user)
 }
 
+
+
 export {findUser,CreateUser}
+
+
+
+
+
+

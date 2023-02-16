@@ -9,13 +9,13 @@ const router = express.Router();
 router.post("/register",async(req,res)=>{
     try {
         const {firstName,lastName,email,password} = req.body
-        console.log(email,"<><><><><")
         const checkUserExist = await findUser(email)
+        console.log(checkUserExist)
         if(checkUserExist){
-            return res.status(409).send(`user with ${email} already exists`)
+            return res.status(409).send(`agent with ${email} already exists`)
         }
         const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hashPassword(password)
+        const hashedPassword = await bcrypt.hash(password,salt)
         const user  = {firstName,lastName,email,password:hashedPassword}
        
         await CreateUser(user)
@@ -25,8 +25,25 @@ router.post("/register",async(req,res)=>{
         res.status(500).send(`error occured while registering agent `)
     }
 })
-
-
+ 
+router.post("/login",async (req,res)=>{
+    try {
+        const {email,password} = req.body;
+        const checkUserExist = await findUser(email);
+        if(!checkUserExist){
+           return res.status(401).send(`user with ${email} dosent exists`);
+        }
+        const check_password = await bcrypt.compare(password,checkUserExist.password)
+        if(!check_password){
+         return  res.status(401).send(`password is incorrect for ${email}`);
+        }   
+        const token = jwt.sign({userId:checkUserExist._id},'secret_key');
+        res.status(200).send({token})
+    } catch (error) {
+            console.error(error);
+            res.status(500).send("error logging in ");
+    }
+})
 
 
 export  {router as default}
