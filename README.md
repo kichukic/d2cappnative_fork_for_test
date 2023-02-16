@@ -17,3 +17,5 @@ npm version  = 8.19.2 and npm version beyond 6
 2). npm i pm2 -g
 3). bash ./start.sh
 4). pm2 logs (to check logs and api calls if needed)
+
+see API_docs to test API'S
