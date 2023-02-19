@@ -1,7 +1,10 @@
 import express from "express";
 import {CreateUser,findUser} from '../models/UserModel.mjs'
 import database from '../Database/db.mjs'
+import { authoriseUser } from "../middlewares/authMiddleware.mjs";
 import bcrypt from 'bcrypt'
+import dotenv from 'dotenv'
+dotenv.config()
 import jwt from 'jsonwebtoken'
 const router = express.Router();
 
@@ -37,7 +40,7 @@ router.post("/login",async (req,res)=>{
         if(!check_password){
          return  res.status(401).send(`password is incorrect for ${email}`);
         }   
-        const token = jwt.sign({userId:checkUserExist._id},'secret_key');
+        const token = jwt.sign({userId:checkUserExist._id},process.env.SECERET_KEY);
         res.status(200).send({token})
     } catch (error) {
             console.error(error);
