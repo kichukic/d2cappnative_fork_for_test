@@ -1,3 +1,6 @@
+                   this project will developed in low priority,so development will get slowed 
+
+           _________________________________________________________________________________________
 the current state of the project is in alpha
 
 this project is fully buildup from the scratch to debug better in future with proper lowlevel documentation, no headstart libraries were used - which is purely madeup from the scratch
