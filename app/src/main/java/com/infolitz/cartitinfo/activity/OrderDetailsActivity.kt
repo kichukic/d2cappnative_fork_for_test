@@ -489,9 +489,12 @@ class OrderDetailsActivity : AppCompatActivity() {
                     Log.e("order::", "customer ID::" + "ct" + userSessionManager.getCustMobile())
                     Log.e("order::", "Quantity::" +productQuantityList[i])
 
-                    Log.e("order::", "orderID:: oId" +i+callUniqueId())
+                    var oId="oId_"+i+callUniqueId()
+//                    Log.e("order::", "orderID:: oId" +i+callUniqueId())
+                    Log.e("order::", "orderID:: "+oId)
 
-                    var orderReference = databaseReference.child("Orders").child("oId_"+i+callUniqueId())
+                    var orderReference = databaseReference.child("Orders").child(oId)
+//                    var orderReference = databaseReference.child("Orders").child("oId_"+i+callUniqueId())
 
                     orderReference.child("address").setValue(getCustAddress()) //increment customercount in agent db
                     orderReference.child("modeOfPay").setValue(modeOfPay) //increment customercount in agent db
@@ -504,6 +507,31 @@ class OrderDetailsActivity : AppCompatActivity() {
                     orderReference.child("customerId").setValue("ct"+userSessionManager.getCustMobile()) //increment customercount in agent db
                     orderReference.child("quantity").setValue(productQuantityList[i]) //increment customercount in agent db
                     orderReference.child("customerMobile").setValue(userSessionManager.getCustMobile()) //increment customercount in agent db
+                    orderReference.child("agentId").setValue(userSessionManager.getAgentUId()) //getAgentUId in agent db
+
+                    // under agent
+                    var userReference=databaseReference.child("Agents").child(userSessionManager.getAgentUId())
+                    userReference.child("order").child(oId).child("orderStatus").setValue("orderPlaced")
+                    userReference.child("order").child(oId).child("totalPrice").setValue(roundoffPrice)
+                    userReference.child("order").child(oId).child("placedDate").setValue(getDateorder())
+                    userReference.child("order").child(oId).child("productId").setValue(productId11)
+                    userReference.child("order").child(oId).child("customerId").setValue("ct"+userSessionManager.getCustMobile())
+                    userReference.child("order").child(oId).child("productName").setValue(name)
+                    userReference.child("order").child(oId).child("quantity").setValue(productQuantityList[i])
+                    userReference.child("order").child(oId).child("customerMobile").setValue(userSessionManager.getCustMobile())
+                    userReference.child("order").child(oId).child("customerAddress").setValue(getCustAddress())
+
+                    // under customer
+                    var customerReference=databaseReference.child("Customers").child("ct"+userSessionManager.getCustMobile())
+                    customerReference.child("order").child(oId).child("orderStatus").setValue("orderPlaced")
+                    customerReference.child("order").child(oId).child("totalPrice").setValue(roundoffPrice)
+                    customerReference.child("order").child(oId).child("placedDate").setValue(getDateorder())
+                    customerReference.child("order").child(oId).child("productId").setValue(productId11)
+                    customerReference.child("order").child(oId).child("agentId").setValue(userSessionManager.getAgentUId())
+                    customerReference.child("order").child(oId).child("productName").setValue(name)
+                    customerReference.child("order").child(oId).child("quantity").setValue(productQuantityList[i])
+
+
                 } else {
                     Log.e("TAG", task.exception!!.message!!) //Don't ignore potential errors!
                 }

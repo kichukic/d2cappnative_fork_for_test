@@ -191,6 +191,9 @@ class HomeFragment : Fragment() {
         gridView = binding!!.gridView
         mLayoutManager = GridLayoutManager(context, 2)
         gridView.layoutManager = mLayoutManager
+
+        //initialisation
+        itemList = arrayListOf<ProductModelHomeFragment>()
     }
 
     ////////////////////////////////////////////////search

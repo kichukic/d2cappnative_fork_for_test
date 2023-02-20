@@ -9,11 +9,13 @@
             android:id="@+id/nav_home"
             android:checked="true"
             android:icon="@drawable/ic_nav_home"
-            android:title="Home" />
+            android:title="Home"
+            android:visible="false"/>
         <item
             android:id="@+id/nav_cart"
             android:icon="@drawable/ic_nav_shopping_cart"
-            android:title="Cart" />
+            android:title="Cart"
+            android:visible="false"/>
 
     </group>
 

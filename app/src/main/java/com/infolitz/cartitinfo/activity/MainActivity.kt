@@ -22,9 +22,13 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.databinding.ActivityMainBinding
+import com.infolitz.cartitinfo.fragment.AgentProfileFragment
 import com.infolitz.cartitinfo.fragment.CartFragment
 import com.infolitz.cartitinfo.fragment.HomeFragment
+import com.infolitz.cartitinfo.fragment.OrdersFragment
 import com.infolitz.cartitinfo.helper.UserSessionManager
+import kotlinx.coroutines.delay
+import java.lang.Thread.sleep
 
 
 class MainActivity : AppCompatActivity() {
@@ -42,14 +46,20 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var drawerLayout:DrawerLayout
     lateinit var tv_text_set_pin:TextView
+    lateinit var relativeLayout: LinearLayout
+    lateinit var currentfragment: Fragment
+    lateinit var currenttittle: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityMainBinding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
+        currentfragment=HomeFragment()
+        currenttittle="Home"
+
 
         initSharedPref()
-        initDrawer()
+        initDrawer(currentfragment,currenttittle)
 
         initFirebase()
         initializeDbRef()
@@ -67,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         val notifCount = MenuItemCompat.getActionView(item) as LinearLayout
 
         tv_text_set_pin = notifCount.findViewById<View>(R.id.actionbar_notifcation_textview) as TextView
-        val relativeLayout = notifCount.findViewById<View>(R.id.relativeLayout_setPin_actionBar) as LinearLayout
+        relativeLayout = notifCount.findViewById<View>(R.id.relativeLayout_setPin_actionBar) as LinearLayout
 
         if(userSessionManager.getAgentPinCode()==0) {
             tv_text_set_pin.text = "Set the pin"
@@ -94,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initDrawer() {
+    private fun initDrawer(fragment: Fragment, tittle: String) {
          drawerLayout =findViewById(R.id.drawer_layout_main_activity)
         val navView: NavigationView =findViewById(R.id.nav_view)
 
@@ -102,24 +112,33 @@ class MainActivity : AppCompatActivity() {
         headerView.findViewById<TextView>(R.id.tv_user_name).text = userSessionManager.getAgentName()// for setting the user name
         headerView.findViewById<TextView>(R.id.tv_user_mail).text = userSessionManager.getAgentEmail()// for setting the user name
 
-        replaceFragment(HomeFragment(),"Home") //on load set the home default
+        replaceFragmentDrawer(fragment,tittle) //on load set the home default
 
         toggle=ActionBarDrawerToggle(this,drawerLayout,R.string.nav_open,R.string.nav_close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        //for side drawer navigation
         navView.setNavigationItemSelectedListener {
             it.isChecked=true
             when(it.itemId){
 
                 R.id.nav_home->{Toast.makeText(applicationContext,"Clicked home",Toast.LENGTH_SHORT).show()
-                                replaceFragment(HomeFragment(),it.title.toString())
+                    relativeLayout.visibility=View.VISIBLE
+                    currentfragment=HomeFragment()
+                    currenttittle="Home"
+                    replaceFragmentDrawer(HomeFragment(),it.title.toString())
                                 }
                 R.id.nav_cart->{Toast.makeText(applicationContext,"Clicked cart",Toast.LENGTH_SHORT).show()
-                    replaceFragment(CartFragment(),it.title.toString())
+                    relativeLayout.visibility=View.GONE
+                    currentfragment=CartFragment()
+                    currenttittle="Cart"
+                    replaceFragmentDrawer(CartFragment(),it.title.toString())
                 }
                 R.id.nav_logout->{Toast.makeText(applicationContext,"Clicked Logout",Toast.LENGTH_SHORT).show()
+                    relativeLayout.visibility=View.GONE
                     onLogOutClicked()
                 }
                /* R.id.set_pin->{
@@ -128,6 +147,37 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        //side drawer nav close
+
+        activityMainBinding.bottomNavigationView.setOnItemSelectedListener {
+
+            when(it.itemId){
+
+                R.id.bottom_nav_home -> {
+                    currentfragment=HomeFragment()
+                    currenttittle="Home"
+                    replaceFragmentBottom(HomeFragment(),"Home")}
+                R.id.bottom_nav_cart -> {
+                    currentfragment=CartFragment()
+                    currenttittle="Cart"
+                    replaceFragmentBottom(CartFragment(),"Cart")}
+                R.id.bottom_nav_order -> {
+                    currentfragment=OrdersFragment()
+                    currenttittle="Order"
+                    replaceFragmentBottom(OrdersFragment(),"Order")}
+                R.id.bottom_nav_profile -> {
+                    currentfragment=AgentProfileFragment()
+                    currenttittle="Profile"
+                    replaceFragmentBottom(AgentProfileFragment(),"Profile")}
+              /*  R.id.settings -> replaceFragment(Settings())*/
+
+                else ->{
+
+                }
+            }
+            true
+        }
+
 
     }
    /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -150,14 +200,22 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-    private fun replaceFragment(fragment: Fragment, tittle:String){
+    private fun replaceFragmentDrawer(fragment: Fragment, tittle:String){
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentLayout,fragment)
         fragmentTransaction.commit()
         drawerLayout.closeDrawers()
         setTitle(tittle)
     }
+    private fun replaceFragmentBottom(fragment : Fragment,tittle: String){
 
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentLayout,fragment)
+        fragmentTransaction.commit()
+        setTitle(tittle)
+
+    }
 
     private fun initSharedPref() {
         userSessionManager = UserSessionManager(this)
@@ -224,7 +282,7 @@ class MainActivity : AppCompatActivity() {
             val pinNumber=etPinNumber.text.toString().toInt()
             userSessionManager.setAgentPinCode(pinNumber)
             writeDataToFirebase(""+pinNumber)
-            initDrawer()
+            initDrawer(currentfragment,currenttittle)
             alertDialog.dismiss()
         }
 
@@ -237,4 +295,6 @@ class MainActivity : AppCompatActivity() {
         userReference.child("agentPinCode").setValue(s)
         tv_text_set_pin.text=""+s
     }
+
+
 }
