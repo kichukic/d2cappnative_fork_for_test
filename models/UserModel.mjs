@@ -1,9 +1,6 @@
 import mongoose from 'mongoose'
 import database from '../Database/db.mjs'
 
-
-
-
 const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
