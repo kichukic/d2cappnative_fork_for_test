@@ -1,6 +1,6 @@
 import express from 'express'
 import { authoriseUser } from '../middlewares/authMiddleware.mjs';
-import { createProduct,deleteProductById } from '../models/productSchema.mjs';
+import { createProduct,deleteProductById,updateProductById } from '../models/productSchema.mjs';
 const router = express.Router();
 
 
@@ -32,9 +32,24 @@ router.delete('/delproduct/:prodId',authoriseUser,async(req,res)=>{
     
    } 
    catch (error) {
-    console.log(">>>>>>>>..",productId)
     res.status(500).send({message:`some error occured during deletion of ${productId}`})
    }
+})
+
+router.put('/editProduct/:prodId',authoriseUser,async(req,res)=>{
+    try {
+        const prodid = req.params.prodId
+        const reqbody =req.body
+        reqbody.updatedAt = Date.now()
+        const updateProduct = await updateProductById(prodid,reqbody)
+        if(!updateProduct){
+            res.status(404).send({message: 'Product not found'})
+        }
+        res.status(200).send({message: `product with id ${prodid} updated with ${updateProduct}`})
+
+    } catch (error) {
+        res.status(500).send({message:"some error occured while updating product"})
+    }
 })
 
 

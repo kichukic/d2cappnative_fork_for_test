@@ -25,7 +25,16 @@ const deleteProductById =async(productId)=>{
   }
 }
 
-export{createProduct,deleteProductById}
+const updateProductById = async(productId,data)=>{
+    try {
+        const result = await Add_Product.findOneAndUpdate({productID:productId},data,{new:true},)
+        return result
+    } catch (error) {
+        throw error ("error updating product")
+    }
+}
+
+export{createProduct,deleteProductById,updateProductById}
 
 
 
