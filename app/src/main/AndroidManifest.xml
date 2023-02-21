@@ -17,6 +17,9 @@
         android:theme="@style/Theme.CartItInfo"
         tools:targetApi="31">
         <activity
+            android:name=".activity.CustomerOrderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.LoginActivity"
             android:exported="false" />
         <activity

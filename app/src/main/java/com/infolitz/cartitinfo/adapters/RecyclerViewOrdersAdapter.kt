@@ -10,7 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.infolitz.cartitinfo.R
-import com.infolitz.cartitinfo.helper.OrderProductModal
+import com.infolitz.cartitinfo.modals.OrderProductModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 
 class RecyclerViewOrdersAdapter(

@@ -17,11 +17,9 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.infolitz.cartitinfo.R
-import com.infolitz.cartitinfo.activity.LoginActivity
 import com.infolitz.cartitinfo.activity.OrderDetailsActivity
 import com.infolitz.cartitinfo.activity.ProductDescripActivity
-import com.infolitz.cartitinfo.fragment.CartFragment
-import com.infolitz.cartitinfo.helper.ProductViewModal
+import com.infolitz.cartitinfo.modals.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 import com.infolitz.cartitinfo.helper.getGlideProgress
 import kotlin.math.roundToInt

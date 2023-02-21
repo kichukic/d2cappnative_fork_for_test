@@ -3,6 +3,7 @@ package com.infolitz.cartitinfo.helper
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.infolitz.cartitinfo.modals.CartProductDetailsModel
 
 class UserSessionManager(context: Context) {
 

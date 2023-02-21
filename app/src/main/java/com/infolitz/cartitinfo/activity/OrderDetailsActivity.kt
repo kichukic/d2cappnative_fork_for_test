@@ -21,7 +21,7 @@ import com.google.firebase.ktx.Firebase
 import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.adapters.RecyclerViewAdapterCart
 import com.infolitz.cartitinfo.databinding.ActivityOrderDetailsBinding
-import com.infolitz.cartitinfo.helper.ProductViewModal
+import com.infolitz.cartitinfo.modals.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 import java.text.SimpleDateFormat
 import java.util.*
@@ -530,6 +530,8 @@ class OrderDetailsActivity : AppCompatActivity() {
                     customerReference.child("order").child(oId).child("agentId").setValue(userSessionManager.getAgentUId())
                     customerReference.child("order").child(oId).child("productName").setValue(name)
                     customerReference.child("order").child(oId).child("quantity").setValue(productQuantityList[i])
+                    customerReference.child("order").child(oId).child("customerMobile").setValue(userSessionManager.getCustMobile())
+                    customerReference.child("order").child(oId).child("customerAddress").setValue(getCustAddress())
 
 
                 } else {

@@ -20,7 +20,7 @@ import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.activity.OrderDetailsActivity
 import com.infolitz.cartitinfo.adapters.RecyclerViewAdapterCart
 import com.infolitz.cartitinfo.databinding.FragmentCartBinding
-import com.infolitz.cartitinfo.helper.ProductViewModal
+import com.infolitz.cartitinfo.modals.ProductViewModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 
 
@@ -118,6 +118,8 @@ class CartFragment : Fragment() {
                 if (snapshot.value.toString()=="null"){
                     Toast.makeText(requireActivity(), "No Items in cart...", Toast.LENGTH_LONG)
                         .show()
+                    disableBottomNav(true)
+                    cartBinding.cartProDetailsOrderBtn.visibility = View.GONE
                 }
 
 

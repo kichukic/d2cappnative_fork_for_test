@@ -131,7 +131,11 @@ class EditAddressActivity : AppCompatActivity() {
         var agentReference = databaseReference.child("Agents").child(userSessionManager.getAgentUId())
         var userReference = databaseReference.child("Customers").child("ct"+binding.addressPhoneEditText.text)
 
-        agentReference.child("customerCount").setValue(userSessionManager.getCustomerCount()) //increment customercount in agent db
+//        agentReference.child("customerId").setValue("ct"+binding.addressPhoneEditText.text) //increment customercount in agent db
+        agentReference.child("customerId").child("ct"+binding.addressPhoneEditText.text)
+            .child("customerName").setValue(binding.addressFirstNameEditText.text.toString()+" "+binding.addressLastNameEditText.text.toString())
+        agentReference.child("customerId").child("ct"+binding.addressPhoneEditText.text)
+            .child("customerNumber").setValue(""+binding.addressPhoneEditText.text.toString())
 
 
         userReference.child("firstName").setValue(binding.addressFirstNameEditText.text.toString())

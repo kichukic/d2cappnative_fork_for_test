@@ -1,4 +1,4 @@
-package com.infolitz.cartitinfo.helper
+package com.infolitz.cartitinfo.modals
 
 data class ProductViewModal(
     val productName: String,

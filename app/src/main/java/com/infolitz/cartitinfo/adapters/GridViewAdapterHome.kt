@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.infolitz.cartitinfo.R
-import com.infolitz.cartitinfo.helper.ProductViewModal
+import com.infolitz.cartitinfo.modals.ProductViewModal
 import com.infolitz.cartitinfo.helper.getGlideProgress
 
 internal class GridViewAdapterHome(

@@ -27,6 +27,7 @@
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/drawable/ic_nav_shopping_cart.xml" value="0.109" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/drawable/ic_pincode_pin_drop_24.xml" value="0.109" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/actionbar_set_pin_layout.xml" value="0.16354166666666667" />
+        <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/activity_customer_order_details.xml" value="0.14947916666666666" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/activity_edit_address.xml" value="0.16666666666666666" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/activity_login.xml" value="0.323943661971831" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -51,6 +52,7 @@
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/layout_top_bar.xml" value="0.16354166666666667" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/nav_header_menu.xml" value="0.16354166666666667" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/recyclerview_cart_data.xml" value="0.16666666666666666" />
+        <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/layout/recyclerview_customers_list.xml" value="0.22" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/menu/bottom_nav.xml" value="0.16354166666666667" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/menu/menu_set_action_bar_pincode.xml" value="0.16354166666666667" />
         <entry key="..\:/Project/Firebase cartIt app INFO/Cart It Info/app/src/main/res/menu/nav_menu.xml" value="0.16354166666666667" />

@@ -16,13 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.infolitz.cartitinfo.R
-import com.infolitz.cartitinfo.adapters.RecyclerViewHomeAdapter
 import com.infolitz.cartitinfo.adapters.RecyclerViewOrdersAdapter
 import com.infolitz.cartitinfo.databinding.FragmentOrdersBinding
-import com.infolitz.cartitinfo.helper.OrderProductModal
-import com.infolitz.cartitinfo.helper.ProductModelHomeFragment
-import com.infolitz.cartitinfo.helper.ProductViewModal
+import com.infolitz.cartitinfo.modals.OrderProductModal
 import com.infolitz.cartitinfo.helper.UserSessionManager
 
 class OrdersFragment : Fragment() {

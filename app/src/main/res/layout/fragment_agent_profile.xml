@@ -5,11 +5,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     tools:context=".fragment.AgentProfileFragment">
+    <include
+        android:id="@+id/loader_layout"
+        layout="@layout/layout_circular_loader"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/profile_image_view"
@@ -97,6 +101,95 @@
             app:layout_constraintStart_toEndOf="@+id/profile_mobile_label_tv"
             app:layout_constraintTop_toTopOf="@+id/profile_mobile_label_tv"
             tools:text="+91 9999988888" />
+
+        <ImageView
+            android:id="@+id/card_dotted_divider"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="16dp"
+            android:layerType="software"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_mobile_label_tv"
+            app:srcCompat="@drawable/dotted_line_drawable" />
+
+        <TextView
+            android:id="@+id/customers_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="16dp"
+            android:padding="16dp"
+            android:text="Your Customers"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:drawableStartCompat="@drawable/ic_baseline_person_24"
+            app:drawableTint="@color/app_blue_variant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_dotted_divider" />
+
+       <!-- <TextView
+            android:id="@+id/profile_mobile_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="16dp"
+            android:textAlignment="viewEnd"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            app:layout_constraintBottom_toBottomOf="@+id/customers_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/customers_label"
+            app:layout_constraintTop_toTopOf="@+id/customers_label"
+            tools:text="+91 9999988888" />-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/customers_label">
+
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <SearchView
+                    android:id="@+id/searchView_Agent_customer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/layout_background_rounded_corners"
+                    android:iconifiedByDefault="false"
+                    android:padding="1dp"
+                    android:queryHint="Search Customer"
+                    android:textCursorDrawable="@drawable/blue_cursor_color" />
+                <!-- <TextView
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center"
+                     android:text="home" />-->
+                <!--        <GridView-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_customers"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="1sp"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2"
+                    android:padding="2dp"
+                    android:verticalSpacing="1dp"
+                    tools:listitem="@layout/recyclerview_customers_list" />
+
+            </LinearLayout>
+        </FrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>
