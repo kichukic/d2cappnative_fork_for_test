@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -28,7 +29,7 @@ class AgentProfileFragment : Fragment() {
     lateinit var userSessionManager: UserSessionManager
     private lateinit var databaseReference: DatabaseReference
 
-
+    lateinit var bottomnav: BottomNavigationView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +37,9 @@ class AgentProfileFragment : Fragment() {
 
         container?.removeAllViews()
         binding = FragmentAgentProfileBinding.inflate(inflater, container, false)
+
+        bottomnav = requireActivity().findViewById(com.infolitz.cartitinfo.R.id.bottomNavigationView);
+        disableBottomNav(false)
 
         initSharedPref()
         initializeDbRef()
@@ -52,7 +56,7 @@ class AgentProfileFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) { //triggered on back button press
                 override fun handleOnBackPressed() {
-                    requireActivity().finish()
+//                    requireActivity().finish()
                 }
             }
 
@@ -66,6 +70,8 @@ class AgentProfileFragment : Fragment() {
         binding!!.profileEmailTv.text= userSessionManager.getAgentEmail()
         binding!!.profileMobileTv.text= userSessionManager.getMobileNumber()
         binding!!.profileNameTv.text= userSessionManager.getAgentName()
+
+        disableBottomNav(true)
     }
 
 
@@ -100,5 +106,11 @@ class AgentProfileFragment : Fragment() {
 
     private fun initSharedPref() {
         userSessionManager = UserSessionManager(requireActivity())
+    }
+    private fun disableBottomNav(b: Boolean) {
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_cart).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_order).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_profile).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_home).isEnabled = b
     }
 }

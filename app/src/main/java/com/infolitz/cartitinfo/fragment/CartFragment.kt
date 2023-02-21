@@ -3,18 +3,20 @@ package com.infolitz.cartitinfo.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.infolitz.cartitinfo.R
 import com.infolitz.cartitinfo.activity.OrderDetailsActivity
 import com.infolitz.cartitinfo.adapters.RecyclerViewAdapterCart
 import com.infolitz.cartitinfo.databinding.FragmentCartBinding
@@ -24,7 +26,7 @@ import com.infolitz.cartitinfo.helper.UserSessionManager
 
 class CartFragment : Fragment() {
 
-    private var cartBinding: FragmentCartBinding?=null
+    lateinit private var cartBinding: FragmentCartBinding
     lateinit var drawerLayout: DrawerLayout
 
     private lateinit var databaseReference: DatabaseReference
@@ -33,6 +35,8 @@ class CartFragment : Fragment() {
     lateinit var itemList: List<ProductViewModal>
     lateinit var data: ArrayList<ProductViewModal>
     lateinit var userSessionManager: UserSessionManager
+
+    lateinit var bottomnav: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,8 +48,12 @@ class CartFragment : Fragment() {
 
          data = ArrayList<ProductViewModal>()
 
+        bottomnav = requireActivity().findViewById(R.id.bottomNavigationView);
+        disableBottomNav(false)
+
         initSharedPref()
         initializeDbRef()
+        recyclerView = cartBinding!!.recyclerView
         initAllProductID()
 
         initclick()
@@ -66,6 +74,20 @@ class CartFragment : Fragment() {
         requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
         return cartBinding?.root
     }
+
+    private fun disableBottomNav(b: Boolean) {
+
+        bottomnav.menu.findItem(R.id.bottom_nav_cart).isEnabled = b
+        bottomnav.menu.findItem(R.id.bottom_nav_order).isEnabled = b
+        bottomnav.menu.findItem(R.id.bottom_nav_profile).isEnabled = b
+        bottomnav.menu.findItem(R.id.bottom_nav_home).isEnabled = b
+    }
+
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initAllProductID()
+    }
+*/
 
     private fun initclick() {
         cartBinding?.cartProDetailsOrderBtn?.setOnClickListener{
@@ -125,7 +147,7 @@ class CartFragment : Fragment() {
     //firebase.....close
 
     private fun initRecyclerView(productIdList: ArrayList<String>) {
-        recyclerView = cartBinding!!.recyclerView
+        recyclerView = cartBinding.recyclerView
 
         // this creates a vertical layout Manager
         recyclerView.layoutManager = LinearLayoutManager(requireActivity())
@@ -186,6 +208,17 @@ class CartFragment : Fragment() {
 //                    itemList = itemList + ProductViewModal(name!!,productId,availPin!!,description!!,price!!,stockCount!!, storeId!!,R.drawable.img_curry_powder_cumin)
 
                     //}
+                    cartBinding!!.loaderLayout.loaderFrameLayout.visibility = View.GONE
+//                    activityMainBinding.bottomNavigationView.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_cart).isEnabled = false
+                    disableBottomNav(true)
+
+
+                    /*val navHostFragment = childFragmentManager.findFragmentById(R.id.container) as NavHostFragment
+                    val navController = navHostFragment.navController
+                    val navView: BottomNavigationView = binding.innerBottomNavigation
+                    navView.setupWithNavController(navController)*/
+
+
 
                     val adapter1 = RecyclerViewAdapterCart(requireActivity(), data/*,quantity*/)
                     recyclerView.adapter =
@@ -245,7 +278,7 @@ class CartFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        cartBinding=null
+//        cartBinding=null
     }
     override fun onResume() {
         super.onResume()

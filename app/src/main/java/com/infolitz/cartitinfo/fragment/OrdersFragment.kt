@@ -12,6 +12,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -45,6 +46,8 @@ class OrdersFragment : Fragment() {
 
     private lateinit var databaseReference: DatabaseReference
 
+    lateinit var bottomnav: BottomNavigationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +56,9 @@ class OrdersFragment : Fragment() {
 
         container?.removeAllViews()
         binding = FragmentOrdersBinding.inflate(inflater, container, false)
+
+        bottomnav = requireActivity().findViewById(com.infolitz.cartitinfo.R.id.bottomNavigationView);
+        disableBottomNav(false)
 
         initSharedPref()
         initializeDbRef()
@@ -68,7 +74,7 @@ class OrdersFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) { //triggered on back button press
                 override fun handleOnBackPressed() {
-                    requireActivity().finish()
+//                    requireActivity().finish()
                 }
             }
 
@@ -94,6 +100,7 @@ class OrdersFragment : Fragment() {
                 }
                 binding?.loaderLayout!!.loaderFrameLayout.visibility= View.GONE
                 binding!!.ordersEmptyTextView.visibility= View.GONE
+                disableBottomNav(true)
 
 
 
@@ -177,4 +184,10 @@ class OrdersFragment : Fragment() {
         userSessionManager = UserSessionManager(requireActivity())
     }
 
+    private fun disableBottomNav(b: Boolean) {
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_cart).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_order).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_profile).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_home).isEnabled = b
+    }
 }

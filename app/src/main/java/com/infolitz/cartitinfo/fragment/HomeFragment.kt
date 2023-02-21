@@ -13,9 +13,12 @@ import android.widget.*
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
+import androidx.core.view.iterator
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -54,6 +57,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var databaseReference: DatabaseReference
 
+    lateinit var bottomnav: BottomNavigationView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +67,9 @@ class HomeFragment : Fragment() {
 
         container?.removeAllViews()
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        bottomnav = requireActivity().findViewById(com.infolitz.cartitinfo.R.id.bottomNavigationView);
+        disableBottomNav(false)
 
         initSharedPref()
         initializeDbRef()
@@ -83,7 +91,7 @@ class HomeFragment : Fragment() {
 
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) { //triggered on back button press
             override fun handleOnBackPressed() {
-                requireActivity().finish()
+//                requireActivity().finish()
             }
         }
 
@@ -92,6 +100,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         return binding?.root
     }
+
+    private fun disableNavigation(b: Boolean) {
+
+    }
+
 
     private fun initClicks() {
         binding?.homeProDetailsAddCartBtn?.setOnClickListener{ //on clicking add to cart item
@@ -297,6 +310,8 @@ class HomeFragment : Fragment() {
                     Log.e("TAG","storeId ::"+storeId) //got storeId
 
 
+                    binding!!.loaderLayout.loaderFrameLayout.visibility = View.GONE
+                    disableBottomNav(true)
 
                     itemList = itemList + ProductModelHomeFragment(name!!,productId,description!!,newPrice!!,stockCount!!, storeId!!,imgUrl!!,productOldPrice!!,false)
 
@@ -545,5 +560,13 @@ class HomeFragment : Fragment() {
 
     fun showAddToCartButton(show:Boolean){
         binding?.homeProDetailsAddCartBtn?.isVisible=show //when show =true; item showed
+    }
+
+    private fun disableBottomNav(b: Boolean) {
+
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_cart).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_order).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_profile).isEnabled = b
+        bottomnav.menu.findItem(com.infolitz.cartitinfo.R.id.bottom_nav_home).isEnabled = b
     }
 }
