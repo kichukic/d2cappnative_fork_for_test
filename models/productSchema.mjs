@@ -2,6 +2,7 @@ import mongoose from 'mongoose'
 
 const ProductSchema = new mongoose.Schema ({
     storeid:{type: 'string',required: true},
+    productID:{type: 'string',required: true},
     name: { type: String, required: true },
     price: { type: Number, required: true },
     description: { type: String, required: true },
@@ -15,4 +16,16 @@ const createProduct =(productSchema)=>{
     return Add_Product.create(productSchema)
 }
 
-export{createProduct}
+const deleteProductById =async(productId)=>{
+  try {
+    const result = await Add_Product.findOneAndDelete({productID:productId})
+    return result
+  } catch (error) {
+    throw new Error ("error deleting productt")
+  }
+}
+
+export{createProduct,deleteProductById}
+
+
+
