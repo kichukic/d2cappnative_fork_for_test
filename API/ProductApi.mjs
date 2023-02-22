@@ -1,17 +1,48 @@
 import express from 'express'
 import { authoriseUser } from '../middlewares/authMiddleware.mjs';
-import { createProduct,deleteProductById,updateProductById,getAllProduct } from '../models/productSchema.mjs';
+import { createProduct,
+          deleteProductById,
+            updateProductById,
+                getAllProduct,
+                    getSingleProduct} from '../models/productSchema.mjs';
 const router = express.Router();
 
 
 router.get("/products",authoriseUser,async(req,res)=>{
     try {
         const products = await getAllProduct()
-        res.status(200).send({message :`${products}`})
+        let details =[]
+        for(let i=0;i<products.length;i++){
+            let productName=products[i].name 
+            let storeID = products[i].storeid
+            let productID = products[i].productID
+            let productPrice = products[i].price
+            let productDescription = products[i].description
+            let Alldetails = {productID,productName,productPrice,productDescription,storeID}
+            details.push(Alldetails)
+        }
+        res.status(200).send({products :details })
     } catch (error) {
-        res.status(500).send("are you authorized?")
-    }
+        res.status(500).send("error getting products")
+    }a
 })
+
+router.get('/products/:prodId',authoriseUser,async(req,res)=>{
+   try {
+    let id = req.params.prodId
+    let products = await getSingleProduct(id)
+    let name = products.name
+    let storeID = products.storeid
+    let productID = products.productID
+    let description = products.description
+    let singleDetails = {name,storeID,productID,description}
+    res.status(200).send({product:singleDetails})
+   } catch (error) {
+    res.status(500).send("error getting product")
+   }
+
+})
+
 
 router.post("/productData",authoriseUser,async(req,res)=>{
     try {

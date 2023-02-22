@@ -16,6 +16,10 @@ const createProduct =(productSchema)=>{
     return Add_Product.create(productSchema)
 }
 
+const getProductById =()=>{
+
+}
+
 const deleteProductById =async(productId)=>{
   try {
     const result = await Add_Product.findOneAndDelete({productID:productId})
@@ -35,14 +39,21 @@ const updateProductById = async(productId,data)=>{
 }
 const getAllProduct =async()=>{
     try {
-        const products = await Add_Product.find()
+        const products = await Add_Product.find({})
         return products
     } catch (error) {
         
     }
 }
+const getSingleProduct=(id)=>{
+   try {
+    return Add_Product.findOne({productID: id})
+   } catch (error) {
+     throw Error("error fetching product")
+   }
+}
 
-export{createProduct,deleteProductById,updateProductById,getAllProduct}
+export{createProduct,deleteProductById,updateProductById,getAllProduct,getSingleProduct}
 
 
 
