@@ -1,14 +1,19 @@
 import express from 'express'
 import { authoriseUser } from '../middlewares/authMiddleware.mjs';
-import { createProduct,deleteProductById,updateProductById } from '../models/productSchema.mjs';
+import { createProduct,deleteProductById,updateProductById,getAllProduct } from '../models/productSchema.mjs';
 const router = express.Router();
 
 
-router.get("/products",authoriseUser,(req,res)=>{
-    res.send("api working on product get call")
+router.get("/products",authoriseUser,async(req,res)=>{
+    try {
+        const products = await getAllProduct()
+        res.status(200).send({message :`${products}`})
+    } catch (error) {
+        res.status(500).send("are you authorized?")
+    }
 })
 
-router.post("/product",authoriseUser,async(req,res)=>{
+router.post("/productData",authoriseUser,async(req,res)=>{
     try {
         const{storeid,productID,name,price,description} =req.body
         const product = {storeid,productID,name,price,description}

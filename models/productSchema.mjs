@@ -33,8 +33,16 @@ const updateProductById = async(productId,data)=>{
         throw error ("error updating product")
     }
 }
+const getAllProduct =async()=>{
+    try {
+        const products = await Add_Product.find()
+        return products
+    } catch (error) {
+        
+    }
+}
 
-export{createProduct,deleteProductById,updateProductById}
+export{createProduct,deleteProductById,updateProductById,getAllProduct}
 
 
 
