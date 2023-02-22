@@ -1,7 +1,7 @@
 import express from "express";
 import http from 'http';
 import mongoose from "mongoose";
-import { config } from "./config/config";
+import config  from "./config/config";
 import Logging from "./library/Logging";
 // import { config } from './config/config';
 import agentRoutes from './routes/Agent';
@@ -64,7 +64,7 @@ const StartServer = () => {
 
     /** Error handling */
     router.use((req,res,next) => {
-        const error = new Error('not found');
+        const error = new Error('not found...');
         Logging.error(error);
 
         return res.status(404).json( {message: error.message});
