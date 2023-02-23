@@ -76,13 +76,13 @@ router.post("/forgot-password",async(req,res)=>{
       }
     })
 
-    console.log(process.env.GOOGLE_PASSWORD)
+    console.log(process.env.GOOGLE_PASSWORD,process.env.GOOGLE_USER)
 
     const mailoptions = {
       to : user.email,
-      from : "alcodextest@gmail.com",
+      from : process.env.FROM_MAIL,
       subject : "password reset request ",
-      text : `hello ${user.name} reset your password here ${process.env.CLIENT_URL}/reset-password/${token}`
+      text : `hello ${user.firstName} reset your password here ${process.env.CLIENT_URL}/reset-password/${token}`
 
     }
     await transporter.sendMail(mailoptions)
