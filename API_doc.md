@@ -16,3 +16,4 @@ bodystructure - {
                   "password":"1234"}
 
 any of the parameters can be added and modified upon changing models and passing a function to API file
+

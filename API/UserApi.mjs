@@ -1,8 +1,10 @@
 import express from "express";
-import { CreateUser, findUser } from "../models/UserModel.mjs";
+import { CreateUser, findUser,ForgotPassword } from "../models/UserModel.mjs";
 import database from "../Database/db.mjs";
 import { authoriseUser } from "../middlewares/authMiddleware.mjs";
 import bcrypt from "bcrypt";
+import nodemailer from 'nodemailer'
+import crypto from 'crypto'
 import dotenv from "dotenv";
 dotenv.config();
 import jwt from "jsonwebtoken";
@@ -52,5 +54,44 @@ router.post("/login", async (req, res) => {
     res.status(500).send("error logging in ");
   }
 });
+
+router.post("/forgot-password",async(req,res)=>{
+  try {
+    const{email} = req.body
+    const user = await findUser(email)
+    const buffer = await crypto.randomBytes(10);
+    const token = buffer.toString('hex');
+    console.log(token)
+    if(!user){
+      res.status(404).send({message:`user with ${email} does not exist`})
+    }
+    ForgotPassword.token = token
+    ForgotPassword.tokenExpiry = Date.now() + 2500000
+   
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth:{
+        user:process.env.GOOGLE_USER,
+        password:process.env.GOOGLE_PASSWORD
+      }
+    })
+
+    console.log(process.env.GOOGLE_PASSWORD)
+
+    const mailoptions = {
+      to : user.email,
+      from : "alcodextest@gmail.com",
+      subject : "password reset request ",
+      text : `hello ${user.name} reset your password here ${process.env.CLIENT_URL}/reset-password/${token}`
+
+    }
+    await transporter.sendMail(mailoptions)
+    res.json({message : `an password reset link has sent to your ${user.email}`})
+
+   } catch (error) {
+    console.log(error)
+    res.status(500).json({message : `An error has occurred`}) 
+   }
+})
 
 export { router as default };

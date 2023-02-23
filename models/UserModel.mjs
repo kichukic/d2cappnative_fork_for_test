@@ -20,6 +20,14 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  reserPasswordToken:{
+    type: String,
+    default:null
+  },
+  tokenExpiry:{
+    type : Date,
+    default:null
   }
 });
 
@@ -33,9 +41,15 @@ const findUser =(email)=>{
     return User.create(user)
 }
 
+const ForgotPassword = async(email,token,expiresIn)=>{
+  const user = await User.findOneAndUpdate({email},
+    {reserPasswordToken:token,tokenExpiry:expiresIn},
+    {new:true})
+    return user;
+}
 
 
-export {findUser,CreateUser}
+export {findUser,CreateUser,ForgotPassword}
 
 
 
