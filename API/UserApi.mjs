@@ -59,6 +59,7 @@ router.post("/forgot-password",async(req,res)=>{
   try {
     const{email} = req.body
     const user = await findUser(email)
+    console.log(">>>>>>",user.firstName)
     const buffer = await crypto.randomBytes(10);
     const token = buffer.toString('hex');
     console.log(token)
@@ -92,6 +93,22 @@ router.post("/forgot-password",async(req,res)=>{
     console.log(error)
     res.status(500).json({message : `An error has occurred`}) 
    }
+})
+
+router.post("/verify-password",async(req,res)=>{
+  try {
+    const user = await findUser(req.body.email)
+    console.log("hiiiii",user)
+    if(!user){
+      res.status(404).json({message: "invalid or token expired"})
+    }
+    ForgotPassword.password = req.body.password
+    ForgotPassword.reserPasswordToken = undefined;
+    ForgotPassword.tokenExpiry =undefined;
+    res.json({message:"your password has been sucessfully changed"})
+  } catch (error) {
+    res.status(500).send({message:"something went wrong",error})
+  }
 })
 
 export { router as default };
