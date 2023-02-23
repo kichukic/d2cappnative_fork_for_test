@@ -65,14 +65,14 @@ router.post("/forgot-password",async(req,res)=>{
     if(!user){
       res.status(404).send({message:`user with ${email} does not exist`})
     }
-    ForgotPassword.token = token
-    ForgotPassword.tokenExpiry = Date.now() + 2500000
+   ForgotPassword(email,token,Date.now()+25000)
+
    
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth:{
         user:process.env.GOOGLE_USER,
-        password:process.env.GOOGLE_PASSWORD
+        pass:process.env.GOOGLE_PASSWORD
       }
     })
 
