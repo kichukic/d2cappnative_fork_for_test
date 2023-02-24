@@ -32,25 +32,35 @@ const userSchema = new mongoose.Schema({
 });
 
 
-const User = mongoose.model('User', userSchema);
+const Users = mongoose.model('User', userSchema);
 
 const findUser =(email)=>{
-    return User.findOne({email})
+    return Users.findOne({email})
 }
 
  const CreateUser = (user)=>{
-    return User.create(user)
+    return Users.create(user)
 }
 
+
+const set_password =async (email,token,password,expiresIn)=>{
+  const user_update =await  Users.findOneAndUpdate({email:email},
+   {password:password,reserPasswordToken:token,tokenExpiry:expiresIn} )
+   return user_update
+}
+
+
+
 const ForgotPassword = async(email,token,expiresIn)=>{
-  const user = await User.findOneAndUpdate({email},
+  const user = await Users.findOneAndUpdate({email:email},
     {reserPasswordToken:token,tokenExpiry:expiresIn},
     {new:true})
     return user;
 }
 
 
-export {findUser,CreateUser,ForgotPassword}
+export {findUser,CreateUser,ForgotPassword,set_password}
+export {Users}
 
 
 

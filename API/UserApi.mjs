@@ -1,6 +1,7 @@
 import express from "express";
-import { CreateUser, findUser,ForgotPassword } from "../models/UserModel.mjs";
+import { CreateUser, findUser,ForgotPassword,set_password} from "../models/UserModel.mjs";
 import database from "../Database/db.mjs";
+import { Users } from "../models/UserModel.mjs";
 import { authoriseUser } from "../middlewares/authMiddleware.mjs";
 import bcrypt from "bcrypt";
 import nodemailer from 'nodemailer'
@@ -59,7 +60,6 @@ router.post("/forgot-password",async(req,res)=>{
   try {
     const{email} = req.body
     const user = await findUser(email)
-    console.log(">>>>>>",user.firstName)
     const buffer = await crypto.randomBytes(10);
     const token = buffer.toString('hex');
     console.log(token)
@@ -83,7 +83,7 @@ router.post("/forgot-password",async(req,res)=>{
       to : user.email,
       from : process.env.FROM_MAIL,
       subject : "password reset request ",
-      text : `hello ${user.firstName} reset your password here ${process.env.CLIENT_URL}/reset-password/${token}`
+      text : `hello ${user.firstName} your reset code is ${token}`
 
     }
     await transporter.sendMail(mailoptions)
@@ -91,24 +91,36 @@ router.post("/forgot-password",async(req,res)=>{
 
    } catch (error) {
     console.log(error)
-    res.status(500).json({message : `An error has occurred`}) 
+    res.status(500).json({message : `An error has occurred`})
    }
 })
 
+
 router.post("/verify-password",async(req,res)=>{
   try {
-    const user = await findUser(req.body.email)
-    console.log("hiiiii",user)
+    const {email,token,password} = req.body
+    const user = await Users.findOne({
+      email: email,
+      reserPasswordToken: token
+    });
+    console.log("<<<>>>",user)
     if(!user){
-      res.status(404).json({message: "invalid or token expired"})
+     return res.status(400).json({ message: "invalid token or email"})
+    } 
+    if (!password) {
+    return  res.status(400).json({ message: "password cannot be empty" });
     }
-    ForgotPassword.password = req.body.password
-    ForgotPassword.reserPasswordToken = undefined;
-    ForgotPassword.tokenExpiry =undefined;
-    res.json({message:"your password has been sucessfully changed"})
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await set_password(email,undefined,hashedPassword,undefined)
+    user.reserPasswordToken = undefined;
+    user.tokenExpiry = undefined;
+    await user.save()
+   return res.json({message:"your password has been sucessfully changed"})
+
   } catch (error) {
-    res.status(500).send({message:"something went wrong",error})
+    return res.status(500).json({message:"something went wrong"})
   }
 })
 
 export { router as default };
+
