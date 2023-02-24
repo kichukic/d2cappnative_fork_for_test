@@ -4,11 +4,11 @@ import extractJWT from "../middleware/extractJWT";
 
 const router =express.Router();
 
-router.post('/create', controller.createAgent);
-router.get('/get/:agentId', controller.getAgent);
-router.get('/getallagent', controller.getAgentAll);
-router.patch('/update/:agentId', controller.updateAgent);
-router.delete('/delete/:agentId', controller.deleteAgent);
+router.post('/agentcreate', controller.createAgent);
+router.get('/agentget/:agentId', extractJWT, controller.getAgent);
+router.get('/agentgetall', extractJWT, controller.getAgentAll);
+router.patch('/agentupdate/:agentId', extractJWT, controller.updateAgent);
+router.delete('/agentdelete/:agentId', extractJWT, controller.deleteAgent);
 
 router.get('/validatetoken', extractJWT, controller.validateToken);
 // router.get('/validatetoken', controller.validateToken);

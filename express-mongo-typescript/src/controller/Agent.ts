@@ -7,7 +7,7 @@ import signJWT from '../functions/signJTW';
 
 
 const createAgent = (req: Request, res: Response, next: NextFunction) => {
-    const { agentname, agentmobile, workpincode, agentemail, password } = req.body;
+    const { agent_name, agent_mobile, workpincode, agent_email, password } = req.body;
 
     bcryptjs.hash(password,10,(hashError,hash) => {
         if (hashError) {
@@ -19,11 +19,11 @@ const createAgent = (req: Request, res: Response, next: NextFunction) => {
         }
 
         const agentdetails = new Agent({
-            _id: new mongoose.Types.ObjectId(),
-            agentname,
-            agentmobile,
+            agent_id: new mongoose.Types.ObjectId(),
+            agent_name,
+            agent_mobile,
             workpincode,
-            agentemail,
+            agent_email,
             password: hash
         });
 

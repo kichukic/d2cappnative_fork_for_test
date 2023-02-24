@@ -9,10 +9,10 @@ export interface IAgentModel extends IAgent,Document{}
 
 const AgentSchema: Schema = new Schema(
     {
-        agentname: { type: String, required: true },
-        agentmobile: { type: String, required: true },
+        agent_name: { type: String, required: true },
+        agent_mobile: { type: String, required: true },
         workpincode: { type: String, required: true },
-        agentemail: { type: String, required: true, unique: true },
+        agent_email: { type: String, required: true, unique: true },
         password: { type: String, required: true }
     },
     {

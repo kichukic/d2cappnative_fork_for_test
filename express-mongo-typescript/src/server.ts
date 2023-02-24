@@ -5,6 +5,10 @@ import config  from "./config/config";
 import Logging from "./library/Logging";
 // import { config } from './config/config';
 import agentRoutes from './routes/Agent';
+import productRoutes from './routes/Product';
+import customerRoutes from './routes/Customer';
+import storeRoutes from './routes/Store';
+import orderRoutes from './routes/Order';
 
 const router = express();
 
@@ -27,47 +31,50 @@ const StartServer = () => {
 
         Logging.info(`Incomming -> Method: [${req.method}] - Url:[${req.url}] - IP: [${req.socket.remoteAddress}]`);
 
-        res.on('finish',() =>{
+        res.on('finish', () => {
             /**Log the response */
-             Logging.info(`Incomming -> Method: [${req.method}] - Url:[${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${req.statusCode}]`);
-        })
+            Logging.info(`Incomming -> Method: [${req.method}] - Url:[${req.url}] - IP: [${req.socket.remoteAddress}] - Status: [${req.statusCode}]`);
+        });
 
         next();
-    })
+    });
 
-    router.use(express.urlencoded({  extended: true}))
+    router.use(express.urlencoded({ extended: true }));
     router.use(express.json());
 
     /** Rules of our API */
-    router.use((req, res, next) =>{
+    router.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
 
-    res.header('Access-Control-Allow-Origin','*');
-    res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept, Authorization');
+        if (req.method == 'OPTIONS') {
+            res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+            return res.status(200).json({});
+        }
 
-    if(req.method == 'OPTIONS'){
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-
-    next();
+        next();
     });
 
     /**Routes */
 
     router.use('/agents', agentRoutes);
+    router.use('/products', productRoutes);
+    router.use('/customers', customerRoutes);
+    router.use('/stores', storeRoutes);
+    router.use('/orders', orderRoutes);
 
     /** Healthcheck */
 
-    router.get('/getme', (req,res,next) =>{
-        res.status(200).json({ message:'hello there'});
+    router.get('/getme', (req, res, next) => {
+        res.status(200).json({ message: 'hello there' });
     });
 
     /** Error handling */
-    router.use((req,res,next) => {
+    router.use((req, res, next) => {
         const error = new Error('not found...');
         Logging.error(error);
 
-        return res.status(404).json( {message: error.message});
+        return res.status(404).json({ message: error.message });
     });
 
     http.createServer(router).listen(config.server.port, () => Logging.info(`Server is running port ${config.server.port}.`));
