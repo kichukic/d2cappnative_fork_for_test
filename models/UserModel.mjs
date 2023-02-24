@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema({
   tokenExpiry:{
     type : Date,
     default:null
+  },
+  emailVerficationToken:{
+    type:String,
+    require: true
+  },
+  emailVerified:{
+    type:Boolean,
+    required:true
   }
 });
 
