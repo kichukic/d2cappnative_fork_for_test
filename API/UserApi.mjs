@@ -18,7 +18,14 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      phoneNumber,
+      agentAreaPincode,
+    } = req.body;
     const checkUserExist = await findUser(email);
     console.log(checkUserExist);
     if (checkUserExist) {
@@ -37,20 +44,22 @@ router.post("/register", async (req, res) => {
     const user = {
       firstName,
       lastName,
+      phoneNumber,
+      agentAreaPincode,
       email,
       password: hashedPassword,
       emailVerficationToken: verificationToken,
       emailVerified: false,
     };
-      await CreateUser(user);
-const mailoptions = {
+    await CreateUser(user);
+    const mailoptions = {
       to: user.email,
       from: process.env.FROM_MAIL,
       subject: "email verfication code ",
-      text: `hello ${user.firstName} your verfication code is ${verificationToken}`,
+      text: `hello ${user.firstName} your link to verify the email http://localhost:4001/home/verify-email/${verificationToken}`,
     };
-      await transporter.sendMail(mailoptions)
-  
+    await transporter.sendMail(mailoptions);
+
     res.status(201).json(`agent ${firstName} registered sucessfully`);
   } catch (error) {
     console.error(error);
@@ -58,35 +67,35 @@ const mailoptions = {
   }
 });
 
-router.get('/verify-email/:token',async(req,res)=>{
+router.get("/verify-email/:token", async (req, res) => {
   try {
     const token = req.params.token;
     const user = await Users.findOne({ emailVerificationToken: token });
-    if(!user){
-      return res.status(404).json({message: "not a valid link or expired"})
+    if (!user) {
+      return res.status(404).json({ message: "not a valid link or expired" });
     }
     user.emailVerficationToken = undefined;
     user.emailVerified = true;
     await user.save();
-    res.status(200).json({message: "email verfication success"})
-
+    res.status(200).json({ message: "email verfication success" });
   } catch (error) {
-    return res.status(500).json({message: "something went wrong while verification"})
+    return res
+      .status(500)
+      .json({ message: "something went wrong while verification" });
   }
-})
-
+});
 
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const checkUserExist = await findUser(email);
-    console.log(checkUserExist.emailVerified)
+    console.log(checkUserExist.emailVerified);
     if (!checkUserExist) {
       return res.status(401).send(`user with ${email} dosent exists`);
     }
 
-    if(!checkUserExist.emailVerified){
-      return res.status(401).json({message:"email not verified"})
+    if (!checkUserExist.emailVerified) {
+      return res.status(401).json({ message: "email not verified" });
     }
     const check_password = await bcrypt.compare(
       password,

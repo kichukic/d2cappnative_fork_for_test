@@ -11,6 +11,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  phoneNumber:{
+    type:Number,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -20,6 +24,10 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  agentAreaPincode:{
+    type : Number,
+    required :true
   },
   reserPasswordToken:{
     type: String,
